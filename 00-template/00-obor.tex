@@ -1,0 +1,273 @@
+%!TEX root=../oi-magistr-spolecne.tex
+\section[A7B01LAG - Matice]{Maticový počet. Hodnost matice, součin matic, inverzní matice, determinant, vlastní číslo a vektor. Řešení lineárních soustav, Gaussova eliminace, Cramerovo pravidlo pro regulární matice soustavy.}
+
+%http://en.wikibooks.org/wiki/LaTeX/Mathematics#cite_note-amsmath-3
+
+\subsection*{Matice}\definice \textit{Matice typu (m, n)} je tabulka reálných (nebo komplexních) čísel s \textit{m} řádky a \textit{n} sloupci. Číslo \textit{$a_{i,j}$} z i-tého řádku a \textit{j-tého} sloupce této tabulky nazýváme \textit{(i,j)-tý} prvek matice. Množinu všech matic typu (m,n) značíme $\textbf{R}^{m,n}$, pokud má reálné prvky, a $\textbf{C}^{m,n}$, pokud má komplexní prvky.Matici \textbf{A} $\in \textbf{R}^{m,n}$ (nebo \textbf{A} $\in C^{m,n}$) zapisujeme takto:
+\begin{center}
+$\textbf{A} = \begin{pmatrix}
+  a_{1,1}, & a_{1,2}, & ..., & a_{1,n} \\
+  a_{2,1}, & a_{2,2}, & ..., & a_{2,n} \\
+  && \vdots & \\
+  a_{m,1}, & a_{m,2}, & ..., & a_{m,n}
+ \end{pmatrix}$
+\end{center}
+
+nebo zapíšeme jen stručně prvky matice \textbf{A}:
+
+$$\textbf{A} = (a_{i,j}), i \in \{1,2,...,m\}, j \in \{1,2,...,n\}$$
+
+\subsection*{Maticový počet - sčítání a násobek}
+\definice Nechť $\bf A = (a_{i,j}) \in R^{m,n} , B = (b_{i,j}) \in R^{m,n}$ . Matici $\bf C \in R^{m,n}$ Nazýváme součtem matic $\bf A, B$ (značíme $\bf C = A + B$), pokud pro prvky matice $\bf C = (c_{i,j})$ platí $c_{i,j} = a_{i,j} + b_{i,j} , i \in {1,2,...,m},j \in {1,2,...,n}$. Nechť $\bf \alpha \in R$. $\alpha$-násobek matice $\bf A$ je matice $\bf \alpha \cdot A = (\alpha~a_{i,j})$. Názorně:
+
+\begin{center}
+$$
+\textbf{A+B} = \begin{pmatrix}
+  a_{11}+b_{11},&a_{12}+b_{12}, & ..., & a_{1,n}+b_{1n} \\
+  a_{21}+b_{21}, & a_{22}+b_{22}, & ..., & a_{2n}+b_{2n} \\
+  && \vdots & \\
+  a_{m1}+b_{m1}, & a_{m2}+b_{m2}, & ..., & a_{mn}+b_{mn}
+ \end{pmatrix}, 
+\alpha \cdot A = \begin{pmatrix}
+  \alpha a_{11}, & \alpha a_{12}, & ..., & \alpha a_{1n} \\
+  \alpha a_{21}, & \alpha a_{22}, & ..., & \alpha a_{2n} \\
+  && \vdots & \\
+  \alpha a_{m1}, & \alpha a_{m2}, & ..., & \alpha a_{mn}
+ \end{pmatrix}
+$$
+\end{center}
+
+\subsection*{Gaussova eliminační metoda - GEM}
+Gaussova eliminační metoda je metoda usnadňující řešení soustav lineárních rovnic. Soustava lineárních rovnic je jedna nebo (obvykle) více lineárních rovnic, které mají být splněny všechny současně.Lineární rovnice je rovnice, ve které se jedna nebo (obvykle) více neznámých vyskytuje pouze v prvnímocnině. Neznámé mohou být násobené různými konstantami a tyto násobky se v součtu mají rovnatdané konstantě, tzv. pravé straně. Řešit soustavu rovnic znamená najít řešení, tj. najít taková reálnáčísla, která po dosazení za neznámé v rovnicích splňují všechny rovnice současně. Rovnice lze zapsat do řádků matice, a řešit tak soustavu několika rovnic jako jednu matici. Povolené akce v GEMu jsou:
+
+\begin{itemize}[topsep=5pt, itemsep=0pt]
+	\item Prohození řádků mezi sebou
+	\item Vynásobení řádku nenulovou konstatnou
+	\item Přičtení libovolného násobku nějakého řádku k jinému
+	\item Odstranění nulového řádku
+\end{itemize}
+
+$$
+\def\+{\kern3pt} \def\|{\kern3pt\strut\vrule}
+  \matice{2 & -5 \|&  16 \cr -2 & 4 \|& -14} \sim
+  \matice{2 & -5 \|&  16 \cr  0 &-1 \|&   2} \sim
+  \matice{2 & -5 \|&  16 \cr  0 & 1 \|&  -2} \sim
+  \matice{2 &  0 \|&   6 \cr  0 &\+1\|&  -2} \sim
+  \matice{1 &  0 \|&   3 \cr  0 &\+1\|&  -2}
+$$
+
+Po přímém chodu GEM vzniká schodovitá (horní trojúhelníková) matice, která má lineárně nezávislé řádky. Schodovitou matici lze definovat jako matici (s řádky $a_1, a_2,..., a_n$), kde pro každé dva po sobě jdoucí řádky $a_i, a_{i+1}$ platí, že následující řádek má vždy alespoň o jednu nulovou složku více.
+
+\subsection*{Hodnost matice}
+
+\definice Hodnost matice $\bf A$ (anglicky {\em rank\/}) značíme $hod(\textbf{A})$ a
+definujeme $ hod(\textbf{A}) = \dim\lobr<\textbf{A}>$ \textit{(dimenze (počet) lineárního obalu množiny všech řádků)}.
+
+Hodnost matice je maximální počet lineárně nezávislých řádků matice. Přesněji řečeno, hodnost udává počet prvků takové množiny řádků, která je nejpočetnější, a přitom lineárně nezávislá. GEM nemění hodnost matice.
+
+Hodnost matice $\bf A$ je rovna počtu nenulových řádků schodovité matice $\bf B$, která vznikne z matice $\bf A$ po přímém chodu GEM. V tomto případě $hod(\textbf{A}) = hod(\textbf{B}) = 3$ (protože GEM nemění hodnost matice).
+
+$$
+\bf A = \begin{pmatrix}
+  1 & 2 & 3 & 4 & 5 \\
+  2 & 3 & 4 & 4 & 7 \\
+  1 & 1 & 1 & 3 & 4 \\
+  3 & 5 & 7 & 8 & 12
+ \end{pmatrix}
+\sim
+\begin{pmatrix}
+  1 & 2 & 3 & 4 & 5 \\
+  0 & 1 & 2 & 4 & 3 \\
+  0 & 1 & 2 & 1 & 1 \\
+  0 & 1 & 2 & 4 & 3
+ \end{pmatrix}
+\sim
+\begin{pmatrix}
+  1 & 2 & 3 & 4 & 5 \\
+  0 & 1 & 2 & 4 & 3 \\
+  0 & 0 & 0 & 3 & 2
+ \end{pmatrix} = \bf B
+$$
+
+
+\subsection*{Součin matic}
+
+\definice Nechť $\bf A=(a_{i,j})$ je matice typu $(m,n)$ a $\bf B=(b_{j,k})$ je matice
+typu $(n,p)$. Pak je definován {\em součin matic $\bf A\cdot\bf B$} 
+(v tomto pořadí) jako matice typu $(m,p)$ takto: 
+každý prvek $c_{i,k}$ matice $\bf A\cdot\bf B$ je dán vzorcem:
+
+$$
+  c_{i,k} = a_{i,1}\,b_{1,k} + a_{i,2}\,b_{2,k} + \cdots + a_{i,n}\,b_{n,k} 
+  = \sum_{j=1}^n a_{i,j}\,b_{j,k}, \quad 
+  i\in\{1,\ldots,m\},\quad k\in\{1,\ldots,p\}.
+$$
+
+Násobení je definováno jen tehdy, pokud počet sloupců
+první matice je roven počtu řádků druhé matice. Výsledná matice má
+stejný počet řádků, jako první matice a stejný počet sloupcù, jako
+druhá matice. Názorně:
+
+Srozumitelněji řečeno, každý prvek matice $\bf A\cdot\bf B$ se spočte jako součet součinů odpovídajících prvků řádku první matice a sloupce druhé matice. (např. výpočet pro levý horní prvek = $1\cdot1 + 2\cdot3 + 3\cdot5 + 4\cdot2 = 30$)
+
+$$
+\begin{pmatrix}
+  \bf1 & \bf2 & \bf3 & \bf4 \\
+  5 & 6 & 7 & 8 \\
+  0 & 2 & 1 & 0
+ \end{pmatrix}
+\cdot
+\begin{pmatrix}
+  \bf1 & 2 \\
+  \bf3 & 4 \\
+  \bf5 & 6 \\
+  \bf2 & 7
+ \end{pmatrix}
+=
+\begin{pmatrix}
+  \bf30 & 56 \\
+  74 & 132 \\
+  11 & 14
+ \end{pmatrix}
+$$
+
+Násobení matic obecně nesplňuje komutativní zákon ani pro čtvercové matice, tj. existují matice \textbf{A}, \textbf{B}, pro které neplatí $\bf A \cdot B = B \cdot A$. Pokud některá z matic $\bf A, B$ není čtvercová, pak součin $\bf B \cdot A$ nemusí být vůbec definován, přestože součin $\bf A \cdot B$ definován je.Dále není splněna ani vlastnost nuly, na kterou jsme zvyklí při násobení reálných čísel: je-li $a \neq 0, b \neq 0$, pak $ab \neq 0$. Pokud násobíme dvě nenulové matice, můžeme dostat matici nulovou.
+
+\paragraph{Vlastnosti násobení:}
+
+\begin{itemize}[topsep=5pt, itemsep=0pt]
+	\item[(1)] $\bf (A \cdot B)  \cdot C = A \cdot (B \cdot C)$ (asociativní zákon)
+	\item[(2)] $\bf (A + B)  \cdot C = A \cdot C + B \cdot C$ (distributivní zákon)
+	\item[(3)] $\bf C \cdot (A + B) = C \cdot A + C \cdot B$ (distributivní zákon)
+	\item[(4)] $\alpha (\bf A \cdot B) = (\alpha A) \cdot B = A \cdot (\alpha B)$
+	\item[(5)] $(\bf A \cdot B)^T = B^T \cdot A^T$
+\end{itemize}
+
+\subsection*{Inverzní matice}
+Pro každé nenulové reálné číslo $a$ existuje reálné číslo $b$ takové, že $ab = 1$. Takové reálné číslo obvykle nazýváme převrácenou hodnotou čísla $a$ a označujeme $1/a$ nebo též $a^{-1}$. Analogicky definujeme "převrácenou hodnotu matice", tzv. inverzní matici.
+\\
+
+\noindent\definice Nechť $\bf A \in R^{n,n}$ je čtvercová matice a $\bf E \in R^{n,n}$ je jednotková matice (všude nuly, na diagonále jedničky). Matici $\bf B \in R^{n,n}$, která splňuje vlastnost $\bf A \cdot B = E = B \cdot A$ nazýváme inverzní maticí k matici $\bf A$. Inverzní matici k matici $\bf A$ označujeme symbolem $\bf A^{-1}$.
+\\
+
+\noindent Čtvercová matice je regulární pokud k ní existuje inverzní matice, jinak je singulární. Pokud existuje inverzní matice k matici, pak je tato inverzní matice jednoznačně určena (existuje pouze jedna).
+
+\paragraph{Výpočet inverzní matice k matici $\bf A$:}
+\begin{enumerate}[topsep=5pt, itemsep=0pt]
+	\item Vedle prvků matice $\bf A$ napíšeme prvky jednotkové matice $\bf E$ - $\bf (A|E)$
+	\item Použijeme řádkové úpravy GEM na matici $\bf (A|E)$ jako celek.
+	\item Po přímém chodu GEM nám vzniká schodovitá matice
+	\item Zpětným chodem GEM se snažíme udělat  jednotkovou matici $\bf E$.
+	\item Po těchto úkonech nám vzniká matice $\bf (E|B)$, kde $\bf B$ je inverzní matice k matici $\bf A$.
+\end{enumerate}
+
+$$
+  \def\+{\kern3pt} \def\|{\kern3pt\strut\vrule}
+  {\bf A} = \matice{1 & 2 & 3 \cr -1 & 0 & 1 \cr 2 & 2 & 1},
+  {\bf E} = \matice{1 & 0 & 0 \cr 0 & 1 & 0 \cr 0 & 0 & 1}
+$$
+
+$$
+  \def\+{\kern3pt} \def\|{\kern3pt\strut\vrule}
+  \matice{1 & 2 & 3 \|& 1 & 0 & 0 \cr -1 & 0 & 1 \|& 0 & 1 & 0  \cr 2 & 2 & 1 \|& 0 & 0 & 1 } \sim
+  \matice{1 & 2 & 3 \|& 1 & 0 & 0 \cr 0 & 2 & 4 \|& 1 & 1 & 0  \cr 0 & -2 & -5 \|& -2 & 0 & 1 } \sim
+  \matice{1 & 2 & 3 \|& 1 & 0 & 0 \cr 0 & 2 & 4 \|& 1 & 1 & 0  \cr 0 & 0 & 1 \|& 1 & -1 & -1 } \sim
+$$
+$$
+  \def\+{\kern3pt} \def\|{\kern3pt\strut\vrule}
+  \sim\matice{1 & 2 & 0 \|& -2 & 3 & 3 \cr 0 & 2 & 0 \|& -3 & 5 & 4  \cr 0 & 0 & 1 \|& 1 & -1 & -1 } \sim
+  \matice{1 & 0 & 0 \|& 1 & -2 & -1 \cr 0 & 1 & 0 \|& -{3\over2} & {5\over2} & 2  \cr 0 & 0 & 1 \|& 1 & -1 & -1 },
+  {\bf A^{-1}} = \matice{1 & -2 & -1 \cr -{3\over2} & {5\over2} & 2  \cr 1 & -1 & -1 }
+$$
+
+\subsection*{Determinant}
+Determinant je číslo, které jistým způsobem charakterizuje čtvercovou matici a které se využívá například při výpočtech řešení soustav lineárních rovnic. Toto číslo má mnoho důležitých významů, se kterými se setkáme nejen v lineární algebře, ale i v jiných matematických disciplínách.
+
+\definice Nechť $\bf A=(a_{i,j})$ je čtvercová matice typu $(n,n)$. Číslo
+$$
+  \sum_{\pi=(i_1,i_2,\ldots,i_n)} 
+  \sgn \pi\cdot a_{1,i_1}\,a_{2,i_2}\cdots\,a_{n,i_n}
+$$
+nazýváme determinantem matice $\bf A$ a značíme ho $\det\A$. V uvedeném vzorci se sčítá přes všechny permutace\footnote{uspořádaná n-tice prvků, kde se žádný prvek neopakuje} $n$ prvků, jedná se tedy o $n!$ sčítanců.
+
+$$
+  {\bf A} = \matice{a_{1,1} & a_{1,2} & a_{1,3} \cr a_{2,1} & a_{2,2} & a_{2,3} \cr a_{3,1} & a_{3,2} & a_{3,3}}
+$$
+
+$$
+  \det\A =   a_{1,1}\cdot a_{2,2}\cdot a_{3,3} 
+           + a_{1,2}\cdot a_{2,3}\cdot a_{3,1}
+           + a_{1,3}\cdot a_{2,1}\cdot a_{3,2}
+           - a_{1,3}\cdot a_{2,2}\cdot a_{3,1}
+           - a_{1,2}\cdot a_{2,1}\cdot a_{3,3}
+           - a_{1,1}\cdot a_{2,3}\cdot a_{3,2}
+$$ 
+
+\paragraph{Metody výpočtu:}
+\begin{enumerate}[topsep=5pt, itemsep=0pt]
+	\item Sčítání a odčítání diagonál - Sarrusovo pravidlo
+	\item GEMem převést na schodovitou matici - vynásobení prvků na hlavní diagonále \textit{(Prohození řádků změní znaménko, vynásobení řádku nenulovým číslem $\alpha$ způsobí, že se determinant $\alpha$-krát zvětší a konečně přičtení $\alpha$-násobku jiného řádků ke zvolenému řádků nezmění hodnotu determinantu.)}
+	\item Doplněk matice
+\end{enumerate}
+
+\paragraph{Vlastnosti:}
+\begin{enumerate}[topsep=5pt, itemsep=0pt]
+	\item Jestliže se matice $\B$ a $\A$ liší jen prohozením jedné dvojice řádků, pak $\det \B = -\det \A$.
+	\item Jestliže matice $\A$ má dva stejné řádky, pak $\det \A = 0$.
+\end{enumerate}
+
+\subsection*{Cramerovo pravidlo pro regulární matice soustavy}
+Jedna z možných variant při řešení soutav rovnic. Vhodné pro měnší matice (3x3). Cramerovo pravidlo se používá pro řešení systému lineárních rovnic, kde matice systému je regulární.
+
+Nechť A je regulární čtvercová matice. Pak pro i-tou složku řešení soustavy $\bf Ax = b$ platí
+
+$$
+  \alpha_i = {\det \B_i \over \det \A}
+$$
+
+kde matice ${\bf B}_i$ je shodná s matící $\bf A$ až na i-tý sloupec, který je zaměněn za sloupec pravých stran.
+
+Při řešení soustavy
+$$
+  \matice{1 & 2 & 3 \cr 3 & 4 & 5 \cr 5 & 6 & 8} \cdot
+  \matice{x_1 \cr x_2 \cr x_3} = \matice{10 \cr 11 \cr 12}
+$$
+použijeme Cramerovo pravidlo. Dostáváme:
+$$
+  x_1 = {1\over D}
+        \begin{vmatrix}
+	10 & 2 & 3 \cr 11 & 4 & 5 \cr 12 & 6 & 8
+	\end{vmatrix}
+        ,
+  x_2 = {1\over D}
+        \begin{vmatrix}
+	1 & 10 & 3 \cr 3 & 11 & 5 \cr 5 & 12 & 8
+	\end{vmatrix}
+        ,
+  x_3 = {1\over D}
+        \begin{vmatrix}
+	1 & 2 & 10 \cr 3 & 4 & 11 \cr 5 & 6 & 12
+	\end{vmatrix}
+        ,
+  \hbox{kde }  D = 
+        \begin{vmatrix}
+	1 & 2 & 3 \cr 3 & 4 & 5 \cr 5 & 6 & 8
+	\end{vmatrix}.
+$$
+Vypočítáním čtyř determinantů z uvedených matic typu (3,3) dostáváme výsledek
+$$
+  x_1 = { 18 \over -2 } = -9, \quad
+  x_2 = { -19 \over -2 } = { 19 \over 2 }, \quad
+  x_3 = { 0 \over -2 } = 0, \quad 
+  (x_1, x_2, x_3) = \left(\! -9, {19\over2}, 0 \right).
+$$
+
+\subsection*{Vlastní číslo a vektor}
+\definice Nechť L je lineární prostor konečné dimenze nad \textbf{C} a nechť $\a: L \to L$ je lineární transformace. Číslo $\lambda \in \textbf{C}$ se nazývá vlastním číslem transformace $\a$, pokud existuje vektor $\vec x \in L, \vec x \neq o$ takový, že $\a(\vec x) = \lambda \vec x$. Vektor $\vec x$, který splňuje uvedenou rovnost, se nazývá vlastní vektor transformace $\a$ příslušný vlastnímu číslu $\lambda$.
+
+V matematice označuje vlastní vektor dané transformace nenulový vektor, jehož směr se při transformaci nemění. Koeficient, o který se změní velikost vektoru, se nazývá vlastní číslo. Množina vlastních vektorů, které náleží stejnému vlastnímu číslu, se nazývá vlastní prostor transformace \cite{wiki:vlastnicislo}. Pojem vlastní číslo definujeme nejenom pro lineární transformace, ale rovněž pro čtvercové matice. Záhy zjistíme, že mezi vlastním číslem transformace a její matice je úzká souvislost.
+
+\noindent \definice Nechť $\A$ je čtvercová matice typu $(n,n)$ reálných nebo komplexních čísel. Číslo $\lambda \in {\bf C}$ se nazývá  vlastním číslem matice $\A$, pokud existuje vektor $\vec x \in {\bf C}^{n,1}$, $\vec x \neq o$, takový, že $\A\cdot \vec x = \lambda \vec x$. Vektor $\vec x$, který splňuje uvedenou rovnost, se nazývá vlastní vektor matice $\A$ příslušný vlastnímu číslu $\lambda$.
+\\
+\\
+Otázka obsahuje texty z \cite{algebra:kniha}.

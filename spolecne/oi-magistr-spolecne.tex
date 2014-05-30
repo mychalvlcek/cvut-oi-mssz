@@ -1,0 +1,61 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[czech, english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{wrapfig}
+\usepackage{graphicx}
+\usepackage{xspace}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{bbding}
+\usepackage{color}
+\usepackage[square, numbers]{natbib}
+\usepackage{url}
+\usepackage{tabularx}
+\usepackage{courier}
+\usepackage{listings,xcolor}
+\usepackage{inconsolata}
+\usepackage{amsmath}
+\usepackage{soul}
+\usepackage{datetime}
+
+% custom packages
+\usepackage{../_lib/infodata} % info strings
+\usepackage{../_lib/macros}
+\usepackage{../_lib/codestyle}
+\usepackage{../_lib/mathstyle}
+
+\usepackage{../_lib/qtree}
+
+\begin{document}
+\selectlanguage{czech}
+
+%%  Titulni strana  %%
+\rendercoverpage
+
+%%  Obsah  %%
+\tableofcontents
+% smazani cisla stranky u obsahu
+\addtocontents{toc}{\protect\thispagestyle{empty}}
+
+\rendermainbody
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%    INCLUDE OTAZEK     %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \include{01-spolecne} % PAL
+
+\include{07/07-spolecne} % KO
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%	BIBLIOGRAFIE	        %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliographystyle{../_lib/csplainnat}
+{
+  \def\CS{$\cal C\kern-0.1667em\lower.5ex\hbox{$\cal S$}\kern-0.075em $}
+  \bibliography{../reference}
+}
+
+\end{document}

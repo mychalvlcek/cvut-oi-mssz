@@ -1,0 +1,132 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%     STYL VYPISU ZDROJOVYCH KODU     %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% barvy do listingu
+\definecolor{dkgreen}{rgb}{0,.6,0}
+\definecolor{dkred}{rgb}{.8,0,0}
+\definecolor{dkblue}{rgb}{0,0,.6}
+\definecolor{lightgray}{rgb}{0.95, 0.95, 0.95}
+\definecolor{mygray}{rgb}{0.85, 0.85, 0.85}
+\definecolor{darkgray}{rgb}{0.4, 0.4, 0.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{editorGray}{rgb}{0.99, 0.99, 0.99}
+\definecolor{editorFuchsia}{rgb}{.8, 0, 0.6}
+\definecolor{editorGreen}{rgb}{0, 0.5, 0}
+\definecolor{pochcanaZluta}{rgb}{.8, 0.6, 0.4}
+
+% JAVA listing
+\lstdefinestyle{java} {
+  language = Java,
+  basicstyle = \small\ttfamily,
+  keywordstyle    = \color{blue},
+  identifierstyle = \color{black},
+  stringstyle     = \color{dkred},
+  identifierstyle = \color{dkblue},
+  commentstyle    = \color{gray},
+  showspaces=false,
+  frame=single,
+  framesep=8pt,
+  xleftmargin=8pt,
+  xrightmargin=4pt,
+  numbers=left,
+  stepnumber=1,    
+  numberstyle=\color{mygray}\texttt,
+  firstnumber=1,
+  numberfirstline=true,
+  tabsize=4,
+  captionpos=b,
+  breaklines=true,
+  breakatwhitespace=false,
+  escapechar=\%,
+  backgroundcolor=\color{editorGray},
+}
+% PHP listing
+\lstdefinestyle{php} {
+  language        = php,
+  basicstyle      = \small\ttfamily,
+  keywordstyle    = \color{blue},
+  stringstyle     = \color{dkred},
+  identifierstyle = \color{dkblue},
+  commentstyle    = \color{gray},
+  alsoletter={<,>,+,-,&,=,!,;},
+  emph =[1]{public, class, function, private, protected, new, return, echo, as, for, foreach, array, &, if, else, break, continue},
+  emphstyle =[1]\color{editorGreen},
+  emph =[2]{<,>,+,-,&,=,!,;},
+  emphstyle =[2]\color{editorGreen},
+  showspaces=false,
+  frame=single,
+  framesep=8pt,
+  xleftmargin=8pt,
+  xrightmargin=4pt,
+  numbers=left,
+  stepnumber=1,    
+  numberstyle=\color{mygray}\texttt,
+  firstnumber=1,
+  numberfirstline=true,
+  tabsize=4,
+  captionpos=b,
+  breaklines=true,
+  breakatwhitespace=false,
+  escapechar=\%,
+  backgroundcolor=\color{editorGray},
+  literate=
+            *{\{}{{\textcolor{editorGreen}{\{}}}{1}
+            {\}}{{\textcolor{editorGreen}{\}}}}{1}
+            {->}{{\textcolor{editorGreen}{->}}}{2}
+            {=>}{{\textcolor{editorGreen}{=>}}}{2}
+            {[}{{\textcolor{editorGreen}{[}}}{1}
+            {]}{{\textcolor{editorGreen}{]}}}{1},
+}
+% SQL listing
+\lstdefinestyle{sql} {
+  language = SQL,
+  basicstyle = \small\ttfamily,
+  keywordstyle    = \color{blue},
+  identifierstyle = \color{black},
+  showspaces=false,
+  frame=single,
+  framesep=8pt,
+  xleftmargin=8pt,
+  xrightmargin=4pt,
+  tabsize=2,
+  captionpos=b,
+  breaklines=true,
+  breakatwhitespace=false,
+  escapechar=\%,
+  backgroundcolor=\color{editorGray},
+}
+% ftp://ftp.tex.ac.uk/tex-archive/macros/latex/contrib/listings/listings.pdf
+% HTML listing
+\lstdefinelanguage{HTML5} {
+  language=html,
+  sensitive=true,	
+  alsoletter={<,=,>,/},
+  morecomment=[s]{<!-}{-->},
+  tag=[s],
+  keywords={
+	/>,>,<,</h1,<h1,<input,</button,<button,<form,</form, <label,</label,<a,</a
+  },
+keywords=[2]{
+	+=, charset=, src=, for=, id=, width=, height=, style=, type=, rel=, href=, action=, name=, placeholder=, method=
+  }
+}
+
+\lstdefinestyle{html} {
+  language=html,
+  basicstyle = \small\ttfamily,
+  identifierstyle=\color{black},
+  keywordstyle=\color{editorFuchsia},
+  stringstyle=\color{pochcanaZluta},
+  commentstyle=\color{darkgray},
+  backgroundcolor=\color{editorGray},
+  showspaces=false,
+  frame=single,
+  framesep=8pt,
+  xleftmargin=8pt,
+  xrightmargin=4pt,
+  tabsize=4,
+  captionpos=b,
+  breaklines=true,
+  breakatwhitespace=false
+}

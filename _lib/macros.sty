@@ -1,0 +1,98 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%     NASTAVENI     %%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength\hoffset{-10pt}
+\setlength\voffset{-\baselineskip}
+\normalsize
+\setlength\textwidth{40em}
+\setlength\topmargin{0pt}
+\setlength\headheight{\baselineskip}
+\setlength\headsep{2\baselineskip}
+\setlength\topskip{\baselineskip}
+\setlength\textheight{45\baselineskip}
+\addtolength\textheight{\topskip}       %calc.sty avoided
+\setlength\footskip{3\baselineskip}
+\typeout{One side layout redefined.}
+\setlength\evensidemargin{0pt}
+\setlength\oddsidemargin{19pt}
+\setlength\marginparsep{0pt}
+\setlength\marginparwidth{0pt}
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+% horizontalní mezera mezi dvema odstavci
+\parskip=5pt
+\normalfont
+\parskip=0.2\baselineskip plus 0.2\baselineskip minus 0.1\baselineskip
+
+\def\ifndef#1{\expandafter\ifx\csname#1\endcsname\relax} % check whether macro is defined
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%       POPISKY     %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\fig}[1]{Obr.~\ref{fig:#1}}
+\newcommand{\Sec}[1]{Sekce~\ref{sec:#1}}
+\newcommand{\listing}[1]{Kód~\ref{listing:#1}}
+\newcommand{\tab}[1]{Tab.~\ref{tab:#1}}
+
+\DeclareUrlCommand\url{\def\urlstyle{tt}}
+\renewcommand{\emph}[1]{\textsl{#1}}
+\let\oldUrl\url
+\renewcommand\url[1]{<\texttt{\oldUrl{#1}}>}
+\renewcommand{\lstlistingname}{Kód}
+
+\usepackage[
+	pdftitle={\WorkTitle},
+	pdfauthor={\Name},
+	bookmarks=true,
+	colorlinks=true,
+	breaklinks=true,
+	urlcolor=red,
+	citecolor=blue,
+	linkcolor=blue,
+	unicode=true,
+]{hyperref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%     COVER PAGE     %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\rendercoverpage
+{
+	\cleardoublepage
+	\pagenumbering{roman}\thispagestyle{empty}\setcounter{page}{3}
+	\begin{center}
+		\large\rmfamily
+		\University\\
+		\Faculty\\
+		\vglue 10mm
+		\includegraphics[width=50mm]{../LogoCVUT}
+		\vglue 30mm
+		\bigskip
+		{\Large\bf \WorkTitle}\\
+		\bigskip
+		{\Large\bf \TitleUrl}\\
+		\bigskip
+		\vfill
+		\vglue 15mm
+		\bigskip
+		\bigskip
+		Vygenerováno: \today~\currenttime
+	\end{center}
+	\newpage
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%     MAIN CONTENT     %%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\rendermainbody{
+	\cleardoublepage
+	\pagestyle{headings}
+	\pagenumbering{arabic}
+	\setcounter{page}{1}
+}
+
+% ceske uvozovky
+\chardef\clqq=18 \sfcode18=0
+\chardef\crqq=16 \sfcode16=0
+\def\uv#1{\clqq#1\crqq}
