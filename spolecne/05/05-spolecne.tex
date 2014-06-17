@@ -1,15 +1,37 @@
 %!TEX root=../oi-magistr-spolecne.tex
 \section[TAL - Algoritmus, P, NP]{Algoritmus, správnost algoritmu, složitost algoritmu, složitost úlohy, třída P, třída NP.}
 
-\subsection*{Algoritmus}
+\paragraph{Algoritmus.}
+\label{algoritmus}
+\emph{Algoritmem} rozumíme dobře definovaný proces, tj. posloupnost výpočetních kroků, který přijímá hodnoty (zadání, vstup) a vytváří hodnoty (řešení, výstup).
 
-\subsection*{Správnost algoritmu}
+\paragraph{Správnost algoritmu}
+K ověření správnosti algoritmu je třeba ověřit 2 věci:
+\begin{enumerate}[itemsep=0pt]
+    \item algoritmus se na každém vstupu zastaví    \item algoritmus po zastavení vydá správný výstup - řešení
+\end{enumerate}
+
+\paragraph{Variant.}
+Pro důkaz faktu, že se algoritmus na každém vstupu zastaví, je založen na nalezení tzv. \emph{variantu}. Variant je hodnota udaná přirozeným číslem, která se během práce algoritmu snižuje až nabude nejmenší možnou hodnotu (a tím zaručuje ukončení algoritmu po konečně mnoha krocích).
+
+Příklad:
+
+\paragraph{Invariant.}
+\emph{Invariant}, též \emph{podmíněná správnost algoritmu}, je tvrzení, které:
+\begin{itemize}[itemsep=0pt]
+    \item platí před vykonáním prvního cyklu algoritmu, nebo po prvním vykonání cyklu    \item platí-li před vykonáním cyklu, platí i po jeho vykonání
+    \item při ukončení práce algoritmu zaručuje správnost řešení
+\end{itemize}
+
+Příklad:
 
 \subsection*{Složitost algoritmu}
 
 \subsection*{Složitost úlohy - třídy složitosti}
+Úlohy/algoritmy chceme nějak zařadit, a tak vznikají třídy složitosti, redukce, atd.
 
 \subsection*{Třída složitosti - P}
-\label{heading:05-npc}
 
 \subsection*{Třída složitosti - NP}
+
+Otázka obsahuje texty, úryvky a definice z \cite{tal:demlova}.

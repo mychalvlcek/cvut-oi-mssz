@@ -2,11 +2,12 @@ cvut-oi-mssz
 -------------
 
 * __témata__: [http://www.fel.cvut.cz/cz/education/master/topicsOI.html](http://www.fel.cvut.cz/cz/education/master/topicsOI.html)
-* __PDF společné__: [https://github.com/vlcekmi3/cvut-oi-mssz/blob/master/spolecne/oi-magistr-spolecne.pdf](https://github.com/vlcekmi3/cvut-oi-mssz/blob/master/spolecne/oi-magistr-spolecne.pdf)
+* __PDF společné__: [https://github.com/vlcekmi3/cvut-oi-mssz/blob/master/spolecne/oi-magistr-spolecne.pdf](https://github.com/vlcekmi3/cvut-oi-mssz/blob/master/spolecne/oi-magistr-spolecne.pdf?raw=true)
 * ..
 
 ### INFO & TIPS & CONVENTIONS
 * `00-template` - složka obsahující šablonu pro tvorbu nové otázky
+* k indentování používat 4 mezery (NE tabulátor)
 * generování PDF:
   * 2-3 běhy generování (kvůli správné indexaci křížových odkazů)
 * před commitem:
