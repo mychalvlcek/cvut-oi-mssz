@@ -10,6 +10,12 @@ cvut-oi-mssz
 * k indentování používat 4 mezery (NE tabulátor)
 * generování PDF:
   * 2-3 běhy generování (kvůli správné indexaci křížových odkazů)
+* commit zprava:
+```
+[spolecna][05][TAL]:
++ algoritmus
++ spravnost (variant, invariant)
+```
 * před commitem:
   * zkontrolovat zda neobsahuje nějaké temp soubory (případně je zahrnout do `.gitignore`)
   * přegenerovat výsledné PDF (aby repozitář vždy obsahoval aktuální PDF)
