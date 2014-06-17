@@ -1,13 +1,16 @@
 %!TEX root=../oi-magistr-spolecne.tex
 \section[KO - ILP, toky]{Metoda větví a mezí. Algoritmy pro celočíselné lineární programování. Formulace optimalizačních a rozhodovacích problémů pomocí celočíselného lineárního programování. Toky a řezy. Multi-komoditní toky.}
 
-%http://en.wikibooks.org/wiki/LaTeX/Mathematics#cite_note-amsmath-3
-
 \subsection*{ILP - celočíselné lineární programování}
-Úloha celočíselného lineárního programování (LP) je zadána maticí A ∈ Rm×n a vektory b ∈ Rm, c ∈ Rn. Cílem je najít takový vektor x ∈ Zn, že platí A · x ≤ b a  cT · x je maximální.
-Obvykle se celočíselné lineární programování zapisuje ve tvaru:  max { cT · x : A · x ≤ b, x ∈ Zn }	
+
+Úloha celočíselného lineárního programování (LP) je zadána maticí $\A \in \R^{m \times n}$ a vektory $b \in \R^m, c \in \R^n$. Cílem je najít takový vektor $x \in \Z^n$, že platí $\A \cdot x \leq b$ a $c^T \cdot x$ je maximální.
+
+Obvykle se celočíselné lineární programování zapisuje ve tvaru:
+
+	$$max(c^T \cdot x : \A \cdot x \leq b, x \in Z^n)$$
+	
 Pokud bychom takovou úlohu řešili pomocí lineárního programování s tím, že bychom výsledek zaokrouhlili, nejenom že bychom neměli zaručeno že výsledné řešení bude optimální ale ani to, zda bude přípustné. 
-Zatímco úloha LP je řešitelná v polynomiálním čase, úloha ILP je tzv. NP-těžká (NP-hard), neboli není znám algoritmus, který by vyřešil libovolnou instanci této úlohy v polynomiálním čase. Protože prostor řešení ILP není konvexní množina, nelze přímo aplikovat metody konvexní optimalizace.
+Zatímco úloha LP je řešitelná v polynomiálním čase, úloha ILP je tzv. \hyperref[heading:05-npc]{NP-těžká} (NP-hard), neboli není znám algoritmus, který by vyřešil libovolnou instanci této úlohy v polynomiálním čase. Protože prostor řešení ILP není konvexní množina, nelze přímo aplikovat metody konvexní optimalizace.
 
 \subsubsection*{Formulace optimalizačních a rozhodovacích problémů pomocí ILP.}
 
