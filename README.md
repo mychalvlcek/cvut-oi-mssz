@@ -1,11 +1,17 @@
 cvut-oi-mssz
 -------------
 
-témata: [http://www.fel.cvut.cz/cz/education/master/topicsOI.html](http://www.fel.cvut.cz/cz/education/master/topicsOI.html)
+* __témata__: [http://www.fel.cvut.cz/cz/education/master/topicsOI.html](http://www.fel.cvut.cz/cz/education/master/topicsOI.html)
+* __PDF společné__: [https://github.com/vlcekmi3/cvut-oi-mssz/blob/master/spolecne/oi-magistr-spolecne.pdf](https://github.com/vlcekmi3/cvut-oi-mssz/blob/master/spolecne/oi-magistr-spolecne.pdf)
+* ..
 
-### INFO & TIPS
+### INFO & TIPS & CONVENTIONS
 * `00-template` - složka obsahující šablonu pro tvorbu nové otázky
-* před commitem zkontrolovat zda neobsahuje nějaké temp soubory (případně je zahrnout do `.gitignore`)
+* generování PDF:
+  * 2-3 běhy generování (kvůli správné indexaci křížových odkazů)
+* před commitem:
+  * zkontrolovat zda neobsahuje nějaké temp soubory (případně je zahrnout do `.gitignore`)
+  * přegenerovat výsledné PDF (aby repozitář vždy obsahoval aktuální PDF)
 
 ### FILES
 * `reference.bib` - seznam veškeré literatury
