@@ -23,6 +23,7 @@ spolecna/05/TAL
 ### FILES
 * `reference.bib` - seznam veškeré literatury
 * `/_lib/csplainnat.bst` - podpora českýho typu citací
+* `/_lib/colors.sty` - vlastně definované barvy
 * `/_lib/qtree.sty` - knihovna pro kreslení stromů [http://www.ling.upenn.edu/advice/latex/qtree/](http://www.ling.upenn.edu/advice/latex/qtree/)
 * `/_lib/infodata.sty` - soubor s doplňujícími informacemi na úvodní stranu (nadpisy apod.)
 * `/_lib/codestyle.sty` - soubor s doplňujícími příkazy pro výpisy kódu
@@ -32,7 +33,7 @@ spolecna/05/TAL
 * `/_lib/macros.sty` - soubor s dalšími doplňujícími příkazy)
 
 ### SPOLEČNÉ
-01. `PAL` - Amortizovaná složitost. Prioritní fronty, haldy (binární, d-regulární, binomiální, Fibonacciho), operace nad nimi a jejich složitost.
+01. ~~`PAL` - Amortizovaná složitost. Prioritní fronty, haldy (binární, d-regulární, binomiální, Fibonacciho), operace nad nimi a jejich složitost.~~
 02. `PAL` - Neorientované a orientované grafy, jejich reprezentace. Prohledávání grafu (do hloubky a do šířky), topologické uspořádání, souvislost, stromy, minimální kostra.
 03. `PAL` - Lexikální analyzátor, syntaktický strom, syntaktický analyzátor shora dolů, LL(1) gramatiky, rozkladové tabulky.
 04. `PAL` - Algoritmy vyhledávaní v textu s lineární a sublineární složitostí, (naivní, Boyer-Moore), využití konečných automatů pro přesné a přibližné hledání v textu.
