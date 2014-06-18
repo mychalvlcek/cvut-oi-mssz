@@ -10,9 +10,9 @@ cvut-oi-mssz
 * k indentování používat 4 mezery (NE tabulátor)
 * generování PDF:
   * 2-3 běhy generování (kvůli správné indexaci křížových odkazů)
-* commit zprava:
+* commit message při změně/úpravě otázek:
 ```
-[spolecna][05][TAL]:
+spolecna/05/TAL
 + algoritmus
 + spravnost (variant, invariant)
 ```
