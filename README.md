@@ -33,11 +33,11 @@ spolecna/05/TAL
 * `/_lib/macros.sty` - soubor s dalšími doplňujícími příkazy)
 
 ### SPOLEČNÉ
-01. ~~`PAL` - Amortizovaná složitost. Prioritní fronty, haldy (binární, d-regulární, binomiální, Fibonacciho), operace nad nimi a jejich složitost.~~
+01. `PAL` - Amortizovaná složitost. Prioritní fronty, haldy (binární, d-regulární, binomiální, Fibonacciho), operace nad nimi a jejich složitost.
 02. `PAL` - Neorientované a orientované grafy, jejich reprezentace. Prohledávání grafu (do hloubky a do šířky), topologické uspořádání, souvislost, stromy, minimální kostra.
 03. `PAL` - Lexikální analyzátor, syntaktický strom, syntaktický analyzátor shora dolů, LL(1) gramatiky, rozkladové tabulky.
 04. `PAL` - Algoritmy vyhledávaní v textu s lineární a sublineární složitostí, (naivní, Boyer-Moore), využití konečných automatů pro přesné a přibližné hledání v textu.
-05. `TAL` - Algoritmus, správnost algoritmu, složitost algoritmu, složitost úlohy, třída P, třída NP.
+05. ~~`TAL` - Algoritmus, správnost algoritmu, složitost algoritmu, složitost úlohy, třída P, třída NP.~~
 06. `TAL` - NP-úplné a NP-těžké úlohy, Cookeova věta, heuristiky na řešení NP-těžkých úloh, pravděpodobnostní algoritmy.
 07. `KO` - Metoda větví a mezí. Algoritmy pro celočíselné lineární programování. Formulace optimalizačních a rozhodovacích problémů pomocí celočíselného lineárního programování. Toky a řezy. Multi-komoditní toky.
 08. `KO` - Nejkratší cesty. Úloha obchodního cestujícího. Heuristiky a aproximační algoritmy. Metoda dynamického programování. Problém batohu. Pseudo-polynomiální algoritmy.
