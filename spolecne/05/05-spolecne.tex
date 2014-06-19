@@ -17,8 +17,6 @@ K ověření správnosti algoritmu je třeba ověřit 2 věci:
 \paragraph{Variant.}
 Pro důkaz faktu, že se algoritmus na každém vstupu zastaví, je založen na nalezení tzv. \textit{variantu}. Variant je hodnota udaná přirozeným číslem, která se během práce algoritmu snižuje až nabude nejmenší možnou hodnotu (a tím zaručuje ukončení algoritmu po konečně mnoha krocích).
 
-Příklad:
-
 \paragraph{Invariant.}
 \textit{Invariant}, též \textit{podmíněná správnost algoritmu}, je tvrzení, které:
 \begin{itemize}[itemsep=0pt]
@@ -26,14 +24,14 @@ Příklad:
     \item při ukončení práce algoritmu zaručuje správnost řešení
 \end{itemize}
 
-Příklad:
-
 \subsection*{Složitost algoritmu}
+Algoritmy lze rozdělit do několika tříd složitosti na základě času a paměti, jež potřebují ke svému vykonání na různých typech Turingových strojů. \cite{algoritmy:slozitosti}
+
 Časovou složitost algoritmu udáváme jako asymptotický odhad $T(n)$ času potřebného pro vyřešení každé instance velikosti $n$.
 
 \subsubsection*{Asymptotický růst funkcí} Definujeme několik symbolů (množin).
 
-\paragraph{$\mathcal{O}$} Je dána nezáporná funkce $g(n)$. Řekneme, že nezáporná funkce $f(n)$ je $\mathcal{O}(g(n))$, jestliže existuje kladná konstanta $c$ a přirozené číslo $n_0$ tak, že
+\paragraph{Symbol $\mathcal{O}$.} Je dána nezáporná funkce $g(n)$. Řekneme, že nezáporná funkce $f(n)$ je $\mathcal{O}(g(n))$, jestliže existuje kladná konstanta $c$ a přirozené číslo $n_0$ tak, že
 
 \begin{center}
     $f(n) \leq c \cdot g(n)$ pro všechny $n \geq n_0$
@@ -44,7 +42,7 @@ $\mathcal{O}(g(n))$ můžeme též chápat jako třídu všech nezáporných fun
 \begin{center}
     $\mathcal{O}(g(n)) = \{ f(n)~|~\exists c > 0, n_o$ tak, že $f(n) \leq c \cdot g(n) ~ \forall n \geq n_0\}$
 \end{center}
-
+\noindent Další symboly:
 \begin{itemize}[itemsep=0pt]
     \item $\Omega(g(n)) = \{ f(n)~|~\exists c > 0 ,n_o$ tak, že $f(n) \geq c \cdot g(n) ~ \forall n \geq n_0\}$
     \item $\Theta(g(n)) = \{ f(n)~|~\exists c_1,c_2 > 0 ,n_o$ tak, že $c_1 \cdot g(n) \leq f(n) \leq c_2 \cdot g(n) ~ \forall n \geq n_0\}$
@@ -52,7 +50,59 @@ $\mathcal{O}(g(n))$ můžeme též chápat jako třídu všech nezáporných fun
     \item $\omega(g(n)) = \{ f(n)~|~\forall c > 0 \exists n_o$ tak, že $ 0 \leq c \cdot g(n) < f(n) ~ \forall n \geq n_0\}$
 \end{itemize}
 
+\paragraph{Tranzitivita $\mathcal{O}, \Omega, \Theta$.} Máme dány tři nezáporné funkce $f(n), g(n), h(n)$
+\begin{itemize}[itemsep=0pt]
+    \item Jestliže $f(n) \in \mathcal{O}(g(n))$ a $g(n) \in \mathcal{O}(h(n))$, pak $f(n) \in \mathcal{O}(h(n))$
+    \item Jestliže $f(n) \in \Omega(g(n))$ a $g(n) \in \Omega(h(n))$, pak $f(n) \in \Omega(h(n))$
+    \item Jestliže $f(n) \in \Theta(g(n))$ a $g(n) \in \Theta(h(n))$, pak $f(n) \in \Theta(h(n))$
+\end{itemize}
+
+\paragraph{Reflexivita $\mathcal{O}, \Omega, \Theta$.} Pro všechny nezáporné funkce $f(n)$ platí:
+\begin{itemize}[itemsep=0pt]
+    \item $f(n) \in \mathcal{O}(f(n))$
+    \item $f(n) \in \Omega(f(n))$
+    \item $f(n) \in \Theta(f(n))$
+\end{itemize}
+
+\subsubsection*{Master Theorem}
+\label{heading:mastertheorem}
+Používá se pro určení asymptotického časového odhadu u rekurentních vztahů.
+
+\noindent
+Jsou dána přirozená čísla $a \geq 1, b \geq 1$ a funkce $f(n)$. Předpokládejme, že funkce $T(n)$ je dána na přirozených číslech rekurentním vztahem
+
+\begin{center}
+    $T(n)=aT\left(\frac{n}{b}\right)+f(n),$ kde $\frac{n}{b}$ znamená buď $\lfloor \frac{n}{b} \rfloor$ nebo $\lceil \frac{n}{b} \rceil$.
+\end{center}
+
+\begin{enumerate}[itemsep=0pt]
+    \item Jesltiže $f(n) \in \mathcal{O}(n^{\log_ba - \epsilon})$ pro nějakou konstantu $\epsilon > 0$, pak $T(n) \in \Theta(n^{\log_ba})$.
+    
+    \item Jesltiže $f(n) \in \Theta(n^{\log_ba})$, pak $T(n) \in \Theta(n^{\log_ba} \lg n)$.
+    
+    \item Jesltiže $f(n) \in \Omega(n^{\log_ba + \epsilon})$ pro nějakou konstantu $\epsilon > 0$ a jestliže $a f(\frac{n}{b}) \leq c f(n)$ pro nějakou konstantu $c < 1$ pro všechna dostatečně velká $n$, pak $T(n) \in \Theta(f(n))$.
+\end{enumerate}
+
+\paragraph{Poznámka.} MT nepokrývá všechny případy.
+
+\example{
+    \begin{spacing}{1.4}
+        \noindent $T(n) = 6T\left(\frac{n}{4}\right) + n^2.\lg(n)$ \textcolor{gray}{// 3. případ $n^2\lg(n) \in \Omega(n^{\log_46})$} \\
+        $6 \left(\frac{n}{4}\right)^2 \lg\left(\frac{n}{4}\right) \leq c \cdot n^2 \lg(n)$ \textcolor{gray}{// roznásobení} \\
+        $\frac{6}{16} n^2 \lg\left(\frac{n}{4}\right) \leq c \cdot n^2 \lg(n)$ \textcolor{gray}{// $\lg\left(\frac{n}{4}\right)$ si "zvětším" na $\lg(n)$} \\
+        $\frac{6}{16} n^2 \lg(n) \leq c \cdot n^2 \lg(n)$ \textcolor{gray}{// pokrátím (vydělím) $n^2 \lg(n)$} \\
+        $\frac{6}{16} \leq c$ \textcolor{gray}{// $c < 1$, platí} \\
+        $\rightarrow T(n) = \Theta(n^2 \lg(n))$
+    \end{spacing}
+}
+
+\paragraph{Poznámka.} Řešit rekurzivní vztahy můžeme také pomocí rekurzivních stromů.
+
+\example
+
+
 \subsection*{Složitost úlohy}
+Složitost úlohy je složitost nejlepšího algoritmu řešícího danou úlohu.
 
 \label{heading:tm}
 \subsection*{Turingův stroj (Turing machine - TM)}

@@ -28,6 +28,33 @@
 
 \def\ifndef#1{\expandafter\ifx\csname#1\endcsname\relax} % check whether macro is defined
 
+% odrazky seznamu - default
+\renewcommand{\labelitemi}{$\bullet$}
+\renewcommand{\labelitemii}{$\cdot$}
+\renewcommand{\labelitemiii}{$\diamond$}
+\renewcommand{\labelitemiv}{$\ast$}
+% odrazky seznamu
+\newcommand*\itemOK{\item[\Checkmark]}
+\newcommand*\itemFAIL{\item[\XSolidBrush]}
+
+\newcommand{\example}[1] {
+    \vspace{10px}
+    
+    \noindent $\RHD$ {\bf Příklad:}
+    \vspace{5px}
+     \begingroup
+    \color{silver}\hrule
+    \endgroup
+    \vspace{-5px}
+    \begin{adjustwidth}{1em}{0pt}
+        \noindent #1
+    \end{adjustwidth}
+    \vspace{-5px}
+    \begingroup
+    \color{silver}\hrule
+    \endgroup
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%       POPISKY     %%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
