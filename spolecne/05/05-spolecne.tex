@@ -96,9 +96,57 @@ Jsou dána přirozená čísla $a \geq 1, b \geq 1$ a funkce $f(n)$. Předpoklá
     \end{spacing}
 }
 
-\paragraph{Poznámka.} Řešit rekurzivní vztahy můžeme také pomocí rekurzivních stromů.
+\subsubsection*{Řešení rekurzivních vztahů pomocí rekurzivních stromů}
 
-\example
+\example {
+    \begin{spacing}{1}
+        \Tree 
+        [.{$T(n) = 3T\left(\frac{n}{4}\right) + n^2$} 
+            [.{$T\left(\frac{n}{4}\right)$} 
+                    {.} 
+                    {.} 
+                    {.} 
+                ] 
+            [.{$T\left(\frac{n}{4}\right)$} 
+                [.{$T\left(\frac{n}{16}\right)$} 
+                    {.} 
+                    {.} 
+                    {.} 
+                ] 
+                [.{$T\left(\frac{n}{16}\right)$} 
+                    {.} 
+                    {.} 
+                    {.} 
+                ] 
+                [.{$T\left(\frac{n}{16}\right)$} 
+                    {.} 
+                    {.} 
+                    {.} 
+                ] 
+            ] 
+            [.{$T\left(\frac{n}{4}\right)$} 
+                    {.} 
+                    {.} 
+                    {.} 
+                ]
+        ]
+        
+    \end{spacing}
+    \vspace{10px}
+    \noindent Vytvoříme si jednotlivé hladiny stromu, který popisuje rekurzivní výpočet funkce $T(n)$. V nulté hladině máme pouze $T(n)$ a hodnotu $n^2$, kterou potřebujeme k výpočtu $T(n)$ (známe-li $T\left(\frac{n}{4}\right)$.
+        V první hladině se nám výpočet $T(n)$ rozpadl na tři výpočty $T(n)$. K tomu potřebujeme hodnotu $3 \cdot (\frac{n}{4})^2 = \frac{3}{16} n^2$.
+        Při přechodu z hladiny $i$ do hladiny $i + 1$ se každý vrchol rozdělí na tři a každý přispěje do celkové hodnoty jednou šestnáctinou předchozího. Proto je součet v hladině $i$ roven $(\frac{3}{16})^i n^2$.
+        Poslední hladina má vrcholy označené hodnotami $T(1)$ a tím rekurze končí. Počet hladin odpovídá $\log_4 n$. V poslední hladině je $3^{\log_4 n} = n^{\log_4 3}$ hodnot $T(1)$. Proto platí
+    
+    $$T(n) = \sum\limits_{i = 0}^{\log_4 n} \left(\frac{3}{16}\right)^i n^2 + \Theta(n^{\log_4 3})$$
+    
+    \noindent Odtud
+    
+        $$T(n) < n^2 \sum\limits_{i = 0}^{\infty} \left(\frac{3}{16}\right)^i + \Theta(n^{\log_4 3}) = n^2 \frac{1}{1 - \frac{3}{16}} + \Theta(n^{\log_4 3}) = \frac{16}{13}n^2 + \Theta(n^{\log_4 3})$$
+        
+    \noindent Proto $T(n) \in \Theta(n^2)$
+    \vspace{10px}
+}
 
 
 \subsection*{Složitost úlohy}
