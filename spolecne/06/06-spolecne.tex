@@ -1,5 +1,82 @@
 %!TEX root=../oi-magistr-spolecne.tex
-\section[TAL - NP (complete, hard), Cookeova věta]{NP-úplné a NP-těžké úlohy, Cookeova věta, heuristiky na řešení NP-těžkých úloh, pravděpodobnostní algoritmy.}
+\section[TAL - $\mathcal{NP}$ (complete, hard), Cookova věta, ..]{$\mathcal{NP}$-úplné a $\mathcal{NP}$-těžké úlohy, Cookova věta, heuristiky na řešení $\mathcal{NP}$-těžkých úloh, pravděpodobnostní algoritmy.}
 
-\subsection*{Třída složitosti - NPC (NP-complete,NP-úplná)}
+Než nadefinujeme třídu $\mathcal{NPC}$, musíme definovat (polynomiální) \textit{redukci úloh}.
+
+\paragraph{Redukce a polynomiální redukce úloh.} Jsou dány dvě rozhodovací úlohy $\mathcal{U}$ a $\mathcal{V}$. Řekneme, že úloha $\mathcal{U}$ se \textit{redukuje} na úlohu $\mathcal{V}$, jestliže existuje algoritmus (program pro RAM, Turingův stroj) $M$, který pro každou instanci $I$ úlohy $\mathcal{U}$ zkonstruuje instanci $I'$ úlohy $\mathcal{V}$ a to tak, že
+
+\begin{center}
+    $I$ je ANO-instance $\mathcal{U}$ iff $I'$ je ANO-instance $\mathcal{V}$
+\end{center}
+
+\noindent Fakt, že úloha $\mathcal{U}$ se redukuje na úlohu $\mathcal{V}$ značíme
+
+$$\mathcal{U} \lhd \mathcal{V}.$$
+
+Jestliže navíc, algoritmus $M$ pracuje v polynomiálním čase, říkáme, že $\mathcal{U}$ se \textit{polynomiálně} redukuje na $\mathcal{V}$ a značíme
+
+$$\mathcal{U} \lhd_p \mathcal{V}.$$
+
+\subsection*{Třída složitosti - $\mathcal{NPC}$ ($\mathcal{NP}$-complete, $\mathcal{NP}$-úplná)}
 \label{heading:npc}
+
+\paragraph{$\mathcal{NP}$ úplné úlohy.} Řekneme, že rozhodovací úloha $\mathcal{U}$ je $\mathcal{NP}$ \textit{úplná }, jestliže
+
+\begin{enumerate}[itemsep=0pt]
+    \item $\mathcal{U}$ je ve třídě $\mathcal{NP}$
+    \item každá $\mathcal{NP}$ úloha se polynomiálně redukuje na $\mathcal{U}$.
+\end{enumerate}
+
+\paragraph{Příklady $\mathcal{NPC}$ úloh:}
+\begin{itemize}[itemsep=0pt]
+    \item \textbf{\color{darkBrown}SAT} Splnitelnost formulí v konjunktivním normálním tvaru.
+    
+    \item \textbf{\color{darkBrown}3 - CNF SAT}
+    
+    \item \textbf{\color{darkBrown}3-barevnost}
+    
+    \item \textbf{\color{darkBrown}ILP}
+\end{itemize}
+
+\subsection*{Třída složitosti - $\mathcal{NP}$-hard ($\mathcal{NP}$-těžká)}
+\label{heading:nphard}
+
+\paragraph{$\mathcal{NP}$ obtížné úlohy.} Jestliže o některé úloze $\mathcal{U}$ pouze víme, že se na ní polynomiálně redukuje některá $\mathcal{NP}$ úplná úloha, pak říkáme, že $\mathcal{U}$ je $\mathcal{NP}$ těžká, nebo též $\mathcal{NP}$ obtížná. Poznamenejme, že to vlastně znamená, že $\mathcal{U}$ je alespoň tak těžká jako všechny $\mathcal{NP}$ úlohy.
+
+\subsection*{Cookova věta}
+Dle Cookovy věty lze převést v polynomiálním čase libovolný nedeterministický Turingův stroj na problém splnitelnosti booleovských formulí v konjunktivním normálním tvaru (CNF SAT).
+
+Důsledkem této věty je vymezení skupiny úloh, které jsou nejtěžší v rámci všech problémů třídy NP. O těchto úlohách, na které lze převést v polynomiálním čase libovolnou jinou úlohu z NP, říkáme, že jsou $\mathcal{NP}$-úplné ($\mathcal{NP}$-complete).
+
+\paragraph{Důkaz.}
+
+\subsection*{Heuristiky na řešení $\mathcal{NP}$-těžkých úloh}
+
+\subsubsection*{2-aproximační algoritmus}
+
+\subsubsection*{Christofidesův algoritmus}
+
+\subsection*{Pravděpodobnostní algoritmy}
+
+\paragraph{Randomizovaný Turingův stroj (RTM).} RTM je, zhruba řečeno, Turingův stroj $M$ se dvěma nebo více páskami, kde první páska má stejnou roli jako u deterministického Turingova stroje, ale druhá páska obsahuje náhodnou posloupnost 0 a 1, tj. na každém políčku se 0 objeví s pravděpodobností $\frac{1}{2}$ a 1také s pravděpodobností $\frac{1}{2}$.
+
+\paragraph{Třída $\mathcal{RP}$.} Jazyk $L$ patří do třídy $\mathcal{RP}$ právě tehdy, když existuje RTM $M$ takový, že:
+
+\begin{enumerate}
+    \item Jestliže $w \notin L$, stroj $M$ se ve stavu $q_f$ zastaví s pravděpodobností 0.
+    \item Jestliže $w \in L$, stroj $M$ se ve stavu $q_f$ zastaví s pravděpodobností, která je alespoň rovna $\frac{1}{2}$.
+    \item Existuje polynom $p(n)$ takový, že každý běh $M$ (tj. pro jakýkoli obsah druhé pásky) trvá maximálně $p(n)$ kroků, kde $n$ je délka vstupního slova.
+\end{enumerate}
+
+\paragraph{Příklady $\mathcal{RP}$ úloh:}
+\begin{itemize}[itemsep=0pt]
+    \item \textbf{\color{darkBrown}Miller-Rabinův test prvočíselnosti}
+\end{itemize}
+
+\paragraph{TM typu Monte-Carlo.} \textit{Monte-Carlo}
+
+\subsubsection*{Třída $\mathcal{ZPP}$}
+
+\paragraph{TM typu Las-Vegas.} \textit{Las-Vegas}
+
+Otázka obsahuje texty, úryvky a definice z \cite{tal:demlova}.
