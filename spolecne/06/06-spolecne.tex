@@ -52,13 +52,30 @@ Důsledkem této věty je vymezení skupiny úloh, které jsou nejtěžší v r�
 
 \subsection*{Heuristiky na řešení $\mathcal{NP}$-těžkých úloh}
 
+Jestliže je třeba řešit problém, který je $\mathcal{NP}$ úplný, musíme pro větší instance opustit myšlenku přesného nebo optimálního řešení a smířit se s tím, že získáme "dostatečně přesné" nebo "dostatečně kvalitní" řešení. K tomu se používají heuristické algoritmy pracující v polynomiálním čase. Algoritmům, kde umíme zaručit "jak daleko" je nalezené řešení od optimálního, se také říká aproximační algoritmy.
+
+\paragraph{Trojúhelníková nerovnost.} Řekneme, že instance obchodního cestujícího splňuje trojúhelníkovou nerovnost, jestliže pro každá tři města $i,j,k$ platí:$$d(i, j) \leq d(i, k) + d(k, j).$$
+
 \subsubsection*{2-aproximační algoritmus}
+Jestliže instance $I$ obchodního cestujícího splňuje trojúhelníkovou nerovnost, pak existuje polynomiální algoritmus $\mathcal{A}$, který pro $I$ najde trasu délky $D$, kde $D \leq 2OPT(I)$ ($OPT(I)$ je délka optimální trasy v $I$).
+
+\paragraph{Slovní popis algoritmu.} Instanci $I$ považujeme za úplný graf $G$ s množinou vrcholů $V = \{1, 2, \hdots , n\}$ a ohodnocením $d$.
+\begin{enumerate}[itemsep=0pt]    \item V grafu $G$ najdeme minimální kostru $(V,K)$.    \item Kostru $(V,K)$ prohledáme do hloubky z libovolného vrcholu.    \item Trasu $T$ vytvoříme tak, že vrcholy procházíme ve stejném pořadí jako při prvním navštívení během prohledávání grafu. $T$ je výstupem algoritmu.
+\end{enumerate}Zřejmě platí, že délka kostry $K$ je menší než $OPT(I)$. Ano, vynecháme- li z optimální trasy některou hranu, dostaneme kostru grafu $G$. Protože $K$ je minimální kostra, musí být délka $K$ menší než $OPT(I)$ (předpokládáme, že vzdálenosti měst jsou kladné). Vzhledem k platnosti trojúhelníkové nerovnosti, je délka $T$ menší nebo rovna dvojnásobku délky kostry $K$.
 
 \subsubsection*{Christofidesův algoritmus}
+Jestliže instance $I$ obchodního cestujícího splňuje trojúhelníkovou nerovnost, pak následující algoritmus najde trasu $T$ délky $D$ takovou, že $D \leq \frac{3}{2} OPT(I)$.
+
+Instanci $I$ považujeme za úplný graf $G$ s množinou vrcholů $V = \{1, 2, \hdots , n\}$ a ohodnocením $d$.
+
+\begin{enumerate}[itemsep=0pt]
+    \item V grafu $G$ najdeme minimální kostru $(V,K)$.    \item Vytvoříme úplný graf $H$ na množině všech vrcholů, které v kostře $(V,K)$ mají lichý stupeň.    \item V grafu $H$ najdeme nejlevnější perfektní párování $P$\footnote{Párování grafu je v teorii grafů taková podmnožina hran grafu, že žádné dvě hrany z této množiny nemají společný vrchol. (Idea je taková, že vrcholy grafu dáváme do párů. Pár může vzniknout jen tam, kde byla hrana. Přitom každý vrchol může být jen v jednom páru. ) Perfektní párování grafu je párování, které pokrývá všechny vrcholy grafu \cite{wiki:parovani}.}.    \item Hrany $P$ přidáme k hranám $K$ minimální kostry. Graf $(V,P \cup K)$ je eulerovský graf. V grafu $(V, P \cup K)$ sestrojíme uzavřený eulerovský tah.    \item Trasu $T$ získáme z eulerovského tahu tak, že vrcholy navštívíme v pořadí, ve kterém jsme do nich poprvé vstoupili při tvorbě eulerovského tahu.
+\end{enumerate}
+\noindent Platí, že délka takto vzniklé trasy je maximálně $\frac{3}{2}$ krát větší než délka optimální trasy.
 
 \subsection*{Pravděpodobnostní algoritmy}
 
-\paragraph{Randomizovaný Turingův stroj (RTM).} RTM je, zhruba řečeno, Turingův stroj $M$ se dvěma nebo více páskami, kde první páska má stejnou roli jako u deterministického Turingova stroje, ale druhá páska obsahuje náhodnou posloupnost 0 a 1, tj. na každém políčku se 0 objeví s pravděpodobností $\frac{1}{2}$ a 1také s pravděpodobností $\frac{1}{2}$.
+\paragraph{Randomizovaný Turingův stroj (RTM).} RTM je, zhruba řečeno, Turingův stroj $M$ se dvěma nebo více páskami ( pásky > 2 obsahují $B$), kde první páska má stejnou roli jako u deterministického Turingova stroje, ale druhá páska obsahuje náhodnou posloupnost 0 a 1, tj. na každém políčku se 0 objeví s pravděpodobností $\frac{1}{2}$ a 1také s pravděpodobností $\frac{1}{2}$.
 
 \paragraph{Třída $\mathcal{RP}$.} Jazyk $L$ patří do třídy $\mathcal{RP}$ právě tehdy, když existuje RTM $M$ takový, že:
 
@@ -73,10 +90,18 @@ Důsledkem této věty je vymezení skupiny úloh, které jsou nejtěžší v r�
     \item \textbf{\color{darkBrown}Miller-Rabinův test prvočíselnosti}
 \end{itemize}
 
-\paragraph{TM typu Monte-Carlo.} \textit{Monte-Carlo}
+\paragraph{TM typu Monte-Carlo.} RTM splňující podmínky 1 a 2 z definice $\mathcal{RP}$ se nazývá TM typu \textit{Monte-Carlo} (obecně nemusí pracovat v polynomiálním čase).
 
-\subsubsection*{Třída $\mathcal{ZPP}$}
+\subsubsection*{Třída $\mathcal{ZPP}$} Jazyk $L$ patří do třídy $\mathcal{ZPP}$ právě tehdy, když existuje RTM $M$ takový, že:
 
-\paragraph{TM typu Las-Vegas.} \textit{Las-Vegas}
+\begin{enumerate}
+    \item Jestliže $w \notin L$, stroj $M$ se ve stavu $q_f$ zastaví s pravděpodobností 0.
+    \item Jestliže $w \in L$, stroj $M$ se ve stavu $q_f$ zastaví s pravděpodobností 1.
+    \item Střední hodnota počtu kroků $M$ v jednom běhu je $p(n)$, kde $p(n)$ je polynom a $n$ je délka vstupního slova.
+\end{enumerate}
+
+To znamená: $M$ neudělá chybu, ale nezaručujeme vždy polynomiální počet kroků při jednom běhu, pouze střední hodnota počtu kroků je polynomiální.
+
+\paragraph{TM typu Las-Vegas.} RTM splňující podmínky z definice $\mathcal{ZPP}$ se nazývá TM typu \textit{Las-Vegas}.
 
 Otázka obsahuje texty, úryvky a definice z \cite{tal:demlova}.
