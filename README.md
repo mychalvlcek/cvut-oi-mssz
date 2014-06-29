@@ -38,7 +38,7 @@ spolecna/05/TAL
 03. `PAL` - Lexikální analyzátor, syntaktický strom, syntaktický analyzátor shora dolů, LL(1) gramatiky, rozkladové tabulky.
 04. `PAL` - Algoritmy vyhledávaní v textu s lineární a sublineární složitostí, (naivní, Boyer-Moore), využití konečných automatů pro přesné a přibližné hledání v textu.
 05. ~~`TAL` - Algoritmus, správnost algoritmu, složitost algoritmu, složitost úlohy, třída P, třída NP.~~
-06. `TAL` - NP-úplné a NP-těžké úlohy, Cookeova věta, heuristiky na řešení NP-těžkých úloh, pravděpodobnostní algoritmy.
+06. ~~`TAL` - NP-úplné a NP-těžké úlohy, Cookeova věta, heuristiky na řešení NP-těžkých úloh, pravděpodobnostní algoritmy.~~
 07. `KO` - Metoda větví a mezí. Algoritmy pro celočíselné lineární programování. Formulace optimalizačních a rozhodovacích problémů pomocí celočíselného lineárního programování. Toky a řezy. Multi-komoditní toky.
 08. `KO` - Nejkratší cesty. Úloha obchodního cestujícího. Heuristiky a aproximační algoritmy. Metoda dynamického programování. Problém batohu. Pseudo-polynomiální algoritmy.
 09. `KO` - Rozvrhování na jednom procesoru a na paralelních procesorech. Rozvrhování projektu s časovými omezeními. Programování s omezujícími podmínkami.
