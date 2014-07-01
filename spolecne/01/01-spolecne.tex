@@ -1,2 +1,62 @@
 %!TEX root=../oi-magistr-spolecne.tex
 \section[PAL - Složitost, fronty, haldy]{Amortizovaná složitost. Prioritní fronty, haldy (binární, d-regulární, binomiální, Fibonacciho), operace nad nimi a jejich složitost.}
+
+\paragraph{Amortizovaná složitost.} Amortizovaná časová složitost označuje časovou složitost algoritmu v sekvenci nejhorších možných vstupních dat. Na rozdíl od průměrné složitosti nevyužívá pravděpodobnosti a je proto zaručená \cite{algoritmy:amortizovanaslozitost}.
+
+Tato metoda vyžaduje znalost toho, které sekvence operací jsou vůbec možné. Nejčastěji se to týká analýzy datových struktur, které si mezi jednotlivými operacemi udržují určitý stav. Některé datové struktury mají totiž takovou vnitřní organizaci, že na ní závisí složitost, a organizovanost dat se může během posloupnosti operací měnit. Základní myšlenka amortizované analýzy tkví v tom, že operace s nejhorší složitostí změní stav struktury tak, že tento nejhorší případ nemůže nastat po dlouhý čas, tudíž amortizuje svou cenu.
+
+Jako jednoduchý příklad můžeme uvést specifickou implementaci dynamického pole, která zdvojnásobuje velikost pole pokaždé, když dojde k jeho naplnění. V tomto případě je tedy nutná realokace, v nejhorším případě tato operace potřebuje čas až $O(n)$ - což je asymptotická složitost. Samotné vkládání prvků (bez nutnosti realokace) vyžaduje čas $O(1)$, pro $n$ prvků tedy také $O(n)$. Pro vložení $n$ prvků (včetně realokace) je tedy potřeba $O(n) + O(n) = O(n)$, amortizovaný čas na jedno vložení prvku je pak $O(n)/n = O(1)$ \cite{wiki:amortizovana}.
+
+\paragraph{Definice.} Je dána datová struktura $D$, na které postupně provádíme posloupnost stejných operací. Začneme s $D_0 = D$. První operace zavolaná na $D_0$ upraví datovou strukturu na $D_1$. Druhá operace zavolaná na $D_1$ upraví datovou strukturu na $D_2$. A tak dále. Postupně zavoláme $i$-tou operaci na $D_{i-1}$ a ta upraví datovou strukturu na $D_i$. Některá operace může trvat krátce, jiná déle. Průměrný čas doby trvání operace nazveme amortizovanou časovou složitostí. Amortizovanou časovou složitost jedné operace spočítáme tak, že spočteme celkovou časovou složitost posloupnosti operací v nejhorším případě a vydělíme ji počtem operací.
+
+K čemu je amortizovaná časová složitost? Pomůže nám lépe odhadnout časovou složitost některých algoritmů v nejhorším případě \cite{algoritmyeu:amortizovana}.
+
+\begin{itemize}[itemsep=0pt, topsep=0pt]
+    \item Účetní metoda
+     \item Metoda potenciálu
+\end{itemize}
+
+\subsection*{Prioritní fronta \textit{(Priority Queue)}}
+Prioritní fronta je \textit{abstraktní datový typ}, podobný klasické frontě či zásobníku s tím rozdílem, že každý element má svou "prioritu". V prioritní frontě je element s vyšší prioritou vybrán dříve než element s nižší prioritou. Pokud dva elementy mají stejnou prioritu, vyberou se v pořadí v jakém byly vloženy.
+
+\paragraph{Operace.} Prioritní fronta musí implementovat alespoň následující operace:
+
+\begin{itemize}[itemsep=0pt, topsep=2pt]
+    \item[-] \texttt{void push(Element e)} - vloží element do prioritní fronty
+    \item[-] \texttt{Element pull()} - vybere z fronty element s nejvyšší prioritou
+\end{itemize}
+
+\subsection*{Haldy}
+Halda obecně je datová struktura (obvykle stromová) splňující \textbf{vlastnost haldy}:
+
+\begin{center}
+    \textit{Pokud A je potomek B, pak B $\geq$ A}
+\end{center}
+
+\paragraph{Binární halda} Je binární strom s dvěma dalšími omezeními:
+
+\begin{enumerate}[itemsep=0pt, topsep=2pt]
+    \item Je to kompletní binární strom krom posledního patra (nemusí být úplné). Elementy posledního patra se plní zleva doprava.
+    \item Každý element je menší nebo roven vůči jeho potomkům (vlastnost haldy).
+\end{enumerate}
+
+Je to jedna z možných implementací prioritní fronty. Reprezentovat ji můžeme pomocí pole, kde prvek na indexu $i$ má potomky na indexech $2i$ a $2i + 1$ a rodiče na indexu $i/2$.
+
+\paragraph{Operace.} Operace binární haldy a jejich složitosti:
+
+\begin{table}[ht]
+    \centering
+    \vspace{0px}
+    \begin{tabu}{|[1pt]c|c|c|[1pt]}
+        \tabucline[1pt]{-}
+        operace & čas. složitost & poznámka \\\tabucline[1pt]{-}
+        \texttt{accessMin()} & $\Theta (1)$ &  \textcolor{gray}{přístup k vrcholu haldy} \\\hline
+        \texttt{deleteMin(e)} & $\Theta (\log(n))$ &  \textcolor{gray}{smazání vrcholu haldy} \\\hline
+        \texttt{insert(e)} & $\Theta (\log(n))$ &  \textcolor{gray}{přidání prvku do haldy} \\\hline
+        \texttt{delete(e)} & $\Theta (\log(n))$ &  \textcolor{gray}{smazání elementu haldy} \\\hline
+        \texttt{merge(h1,h2)} & $\Theta (n_1 + n_2)$ &  \textcolor{gray}{sloučení 2 hald} \\\hline
+        \texttt{decreaseKey(k,v)} & $\Theta (\log(n))$ &  \textcolor{gray}{snížení hodnoty klíče $k$ o $v$} \\\hline
+    \end{tabu}
+    \caption{Binární halda - Operace a jejich složitosti}
+\label{table:bin_heap_complexity}
+\end{table}
