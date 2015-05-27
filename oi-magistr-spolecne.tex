@@ -1,0 +1,101 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[czech, english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage[square, numbers]{natbib} % sazba pouzite literatury
+\usepackage{indentfirst} % 1. odstavec jako v cestine, pro práci v aj možno zakomentovat
+\usepackage{fancyhdr} % tisk hlaviček a patiček stránek
+\usepackage{nomencl} % umožňuje snadno definovat zkratky a jejich seznam
+
+% \usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{xspace}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{bbding}
+\usepackage[usenames,dvipsnames]{color} % barvy
+\usepackage{url}
+\usepackage{subscript}
+
+\usepackage{tabularx}
+\usepackage{pdflscape}
+\usepackage{lipsum}
+
+\usepackage{courier}
+\usepackage{float}
+\usepackage{nonfloat}
+\usepackage{wrapfig}
+
+% utrzky kodu
+\usepackage{listings,xcolor}
+\usepackage{inconsolata}
+\usepackage{algorithm}
+\usepackage{algorithmicx} %slouží pro zápis algoritmů
+\usepackage{algpseudocode} %slouží pro výpis pseudokódu
+\usepackage{eqparbox}
+\usepackage{dirtree}
+\usepackage{array}
+\usepackage{amsmath} % matematicke symboly
+\usepackage{amsfonts}
+\usepackage{amsxtra} % matematicka pismena
+\usepackage{wasysym} % znak vyplnene sipky
+\usepackage{setspace} % vyska radku
+\usepackage{changepage} % zmena okraju stranky
+\usepackage{soul}
+\usepackage{datetime} % datum a cas
+\usepackage{tabu} % vylepsene tabulky - ruzne siroke ohraniceni
+\usepackage{pgfgantt}
+\usepackage{textcomp}
+\usepackage{pgfplots}
+\usepackage{filecontents}
+\usepackage{pgfplots}
+\usepackage{tikz} % grafy
+\usetikzlibrary{arrows,shapes,backgrounds,snakes,patterns,calc,trees,positioning,chains,shapes.geometric,decorations.pathreplacing,decorations.pathmorphing,matrix,shapes.symbols,pgfplots.groupplots}
+
+% custom packages
+\usepackage{_lib/infodata} % info strings
+\usepackage{_lib/mathstyle}
+\usepackage{_lib/macros}
+\usepackage{_lib/colors} % barvy
+\usepackage{_lib/codestyle} % highlight zdrojovych kodu
+\usepackage{_lib/mathstyle} % matematicke pomocne fce
+
+\usepackage{_lib/qtree}
+
+\begin{document}
+    \selectlanguage{czech}
+
+    %%  Titulni strana  %%
+    \rendercoverpage
+
+    %%  Obsah  %%
+    \tableofcontents
+    % smazani cisla stranky u obsahu
+    \addtocontents{toc}{\protect\thispagestyle{empty}}
+
+    \rendermainbody
+    
+    \include{01/01-spolecne} % PAL
+    \include{02/02-spolecne} % PAL
+    \include{03/03-spolecne} % PAL
+    \include{04/04-spolecne} % PAL
+    \include{05/05-spolecne} % TAL
+    \include{06/06-spolecne} % TAL
+    \include{07/07-spolecne} % TAL
+    \include{08/08-spolecne} % KO
+    \include{09/09-spolecne} % KO
+    \include{10/10-spolecne} % KO
+
+
+    \bibliographystyle{_lib/csplainnat}
+    {
+        \footnotesize
+        \def\CS{$\cal C\kern-0.1667em\lower.5ex\hbox{$\cal S$}\kern-0.075em $}
+        \bibliography{reference}
+    }
+
+\end{document}

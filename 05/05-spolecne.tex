@@ -1,0 +1,222 @@
+%!TEX root=../oi-magistr-spolecne.tex
+\section[TAL - Algoritmus, $\mathcal{P}$, $\mathcal{NP}$]{Algoritmus, správnost algoritmu, složitost algoritmu, složitost úlohy, třída $\mathcal{P}$, třída $\mathcal{NP}$.}
+
+\paragraph{Algoritmus.}
+\label{algoritmus}
+\textit{Algoritmem} rozumíme dobře definovaný proces, tj. posloupnost výpočetních kroků, který přijímá hodnoty (zadání, vstup) a vytváří hodnoty (řešení, výstup).
+
+Řekneme, že algoritmus $\mathcal{A}$ \textit{řeší}  úlohu $\mathcal{U}$, jestliže pro každý vstup (každou instanci problému $\mathcal{U}$) vydá správné řešení.
+
+\paragraph{Správnost algoritmu}
+K ověření správnosti algoritmu je třeba ověřit 2 věci:
+\begin{enumerate}[itemsep=0pt]
+    \item algoritmus se na každém vstupu zastaví
+    \item algoritmus po zastavení vydá správný výstup - řešení
+\end{enumerate}
+
+\paragraph{Variant}
+Důkaz faktu, že se algoritmus na každém vstupu zastaví, je založen na nalezení tzv. \textit{variantu}. Variant je hodnota udaná přirozeným číslem, která se během práce algoritmu snižuje až nabude nejmenší možnou hodnotu (a tím zaručuje ukončení algoritmu po konečně mnoha krocích).
+
+\paragraph{Invariant}
+\textit{Invariant}, též \textit{podmíněná správnost algoritmu}, je tvrzení, které:
+\begin{itemize}[itemsep=0pt]
+    \item platí před vykonáním prvního cyklu algoritmu, nebo po prvním vykonání cyklu
+    \item platí-li před vykonáním cyklu, platí i po jeho vykonání
+    \item při ukončení práce algoritmu zaručuje správnost řešení
+\end{itemize}
+
+\subsection{Složitost algoritmu}
+Složitost algoritmu udává, jak je daný algoritmus rychlý (kolik provede elementárních operací) vzhledem k množině vstupních dat. Ke klasifikaci algoritmů se obvykle používá tzv. asymtotická složitost, což je rozdělení algoritmů do tříd složitostí, u kterých platí, že od určité velikosti dat, je algoritmus dané třídy vždy pomalejší než algoritmus třídy předchozí, bez ohledu na to, jestli je některý z počítačů $c$-násobně výkonnější ($c$ je konstanta).
+
+Algoritmy lze rozdělit do několika tříd složitosti na základě času a paměti, jež potřebují ke svému vykonání na různých typech Turingových strojů. \cite{algoritmy:slozitosti}
+
+Časovou složitost algoritmu udáváme jako asymptotický odhad $T(n)$ času potřebného pro vyřešení každé instance velikosti $n$.
+
+\subsubsection{Asymptotický růst funkcí} Definujeme několik symbolů (množin).
+
+\paragraph{Symbol $\mathcal{O}$.} Je dána nezáporná funkce $g(n)$. Řekneme, že nezáporná funkce $f(n)$ je $\mathcal{O}(g(n))$, jestliže existuje kladná konstanta $c$ a přirozené číslo $n_0$ tak, že
+
+\begin{center}
+    $f(n) \leq c \cdot g(n)$ pro všechny $n \geq n_0$
+\end{center}
+
+$\mathcal{O}(g(n))$ můžeme též chápat jako třídu všech nezáporných funkcí $f(n)$:
+
+\begin{center}
+    $\mathcal{O}(g(n)) = \{ f(n)~|~\exists c > 0, n_o$ tak, že $f(n) \leq c \cdot g(n) ~ \forall n \geq n_0\}$
+\end{center}
+\noindent Další symboly:
+\begin{itemize}[itemsep=0pt]
+    \item $\Omega(g(n)) = \{ f(n)~|~\exists c > 0 ,n_o$ tak, že $f(n) \geq c \cdot g(n) ~ \forall n \geq n_0\}$
+    \item $\Theta(g(n)) = \{ f(n)~|~\exists c_1,c_2 > 0 ,n_o$ tak, že $c_1 \cdot g(n) \leq f(n) \leq c_2 \cdot g(n) ~ \forall n \geq n_0\}$
+    \item $o(g(n)) = \{ f(n)~|~\forall c > 0 ~\exists n_o$ tak, že $ 0 \leq f(n) < c \cdot g(n) ~ \forall n \geq n_0\}$
+    \item $\omega(g(n)) = \{ f(n)~|~\forall c > 0 ~\exists n_o$ tak, že $ 0 \leq c \cdot g(n) < f(n) ~ \forall n \geq n_0\}$
+\end{itemize}
+
+\paragraph{Tranzitivita $\mathcal{O}, \Omega, \Theta$.} Máme dány tři nezáporné funkce $f(n), g(n), h(n)$
+\begin{itemize}[itemsep=0pt]
+    \item Jestliže $f(n) \in \mathcal{O}(g(n))$ a $g(n) \in \mathcal{O}(h(n))$, pak $f(n) \in \mathcal{O}(h(n))$
+    \item Jestliže $f(n) \in \Omega(g(n))$ a $g(n) \in \Omega(h(n))$, pak $f(n) \in \Omega(h(n))$
+    \item Jestliže $f(n) \in \Theta(g(n))$ a $g(n) \in \Theta(h(n))$, pak $f(n) \in \Theta(h(n))$
+\end{itemize}
+
+\paragraph{Reflexivita $\mathcal{O}, \Omega, \Theta$.} Pro všechny nezáporné funkce $f(n)$ platí:
+\begin{itemize}[itemsep=0pt]
+    \item $f(n) \in \mathcal{O}(f(n))$
+    \item $f(n) \in \Omega(f(n))$
+    \item $f(n) \in \Theta(f(n))$
+\end{itemize}
+
+\subsubsection{Master Theorem}
+\label{heading:mastertheorem}
+Používá se pro určení asymptotického časového odhadu u rekurentních vztahů.
+
+\noindent
+Jsou dána přirozená čísla $a \geq 1, b \geq 1$ a funkce $f(n)$. Předpokládejme, že funkce $T(n)$ je dána na přirozených číslech rekurentním vztahem
+
+\begin{center}
+    $T(n)=aT\left(\frac{n}{b}\right)+f(n),$ kde $\frac{n}{b}$ znamená buď $\lfloor \frac{n}{b} \rfloor$ nebo $\lceil \frac{n}{b} \rceil$.
+\end{center}
+
+\begin{enumerate}[itemsep=0pt]
+    \item Jesltiže $f(n) \in \mathcal{O}(n^{\log_ba - \epsilon})$ pro nějakou konstantu $\epsilon > 0$, pak $T(n) \in \Theta(n^{\log_ba})$.
+    
+    \item Jesltiže $f(n) \in \Theta(n^{\log_ba})$, pak $T(n) \in \Theta(n^{\log_ba} \lg n)$.
+    
+    \item Jesltiže $f(n) \in \Omega(n^{\log_ba + \epsilon})$ pro nějakou konstantu $\epsilon > 0$ a jestliže $a f(\frac{n}{b}) \leq c f(n)$ pro nějakou konstantu $c < 1$ pro všechna dostatečně velká $n$, pak $T(n) \in \Theta(f(n))$.
+\end{enumerate}
+
+\noindent MT nepokrývá všechny případy.
+
+\newpage
+
+\example{Příklad}{
+    \begin{spacing}{1.4}
+        \noindent $T(n) = 6T\left(\frac{n}{4}\right) + n^2.\lg(n)$ \textcolor{gray}{// 3. případ $n^2\lg(n) \in \Omega(n^{\log_46})$} \\
+        $6 \left(\frac{n}{4}\right)^2 \lg\left(\frac{n}{4}\right) \leq c \cdot n^2 \lg(n)$ \textcolor{gray}{// roznásobení} \\
+        $\frac{6}{16} n^2 \lg\left(\frac{n}{4}\right) \leq c \cdot n^2 \lg(n)$ \textcolor{gray}{// $\lg\left(\frac{n}{4}\right)$ si "zvětším" na $\lg(n)$} \\
+        $\frac{6}{16} n^2 \lg(n) \leq c \cdot n^2 \lg(n)$ \textcolor{gray}{// pokrátím (vydělím) $n^2 \lg(n)$} \\
+        $\frac{6}{16} \leq c$ \textcolor{gray}{// $c < 1$, platí} \\
+        $\rightarrow T(n) = \Theta(n^2 \lg(n))$
+    \end{spacing}
+}
+
+\subsubsection{Řešení rekurzivních vztahů pomocí rekurzivních stromů}
+
+\example{Příklad}{
+    \begin{spacing}{1}
+        \Tree 
+        [.{$T(n) = 3T\left(\frac{n}{4}\right) + n^2$} 
+            [.{$T\left(\frac{n}{4}\right)$} 
+                    {.} 
+                    {.} 
+                    {.} 
+                ] 
+            [.{$T\left(\frac{n}{4}\right)$} 
+                [.{$T\left(\frac{n}{16}\right)$} 
+                    {.} 
+                    {.} 
+                    {.} 
+                ] 
+                [.{$T\left(\frac{n}{16}\right)$} 
+                    {.} 
+                    {.} 
+                    {.} 
+                ] 
+                [.{$T\left(\frac{n}{16}\right)$} 
+                    {.} 
+                    {.} 
+                    {.} 
+                ] 
+            ] 
+            [.{$T\left(\frac{n}{4}\right)$} 
+                    {.} 
+                    {.} 
+                    {.} 
+                ]
+        ]
+        
+    \end{spacing}
+    \vspace{10px}
+    \noindent Vytvoříme si jednotlivé hladiny stromu, který popisuje rekurzivní výpočet funkce $T(n)$. V nulté hladině máme pouze $T(n)$ a hodnotu $n^2$, kterou potřebujeme k výpočtu $T(n)$ (známe-li $T\left(\frac{n}{4}\right)$.
+        V první hladině se nám výpočet $T(n)$ rozpadl na tři výpočty $T(n)$. K tomu potřebujeme hodnotu $3 \cdot (\frac{n}{4})^2 = \frac{3}{16} n^2$.
+        Při přechodu z hladiny $i$ do hladiny $i + 1$ se každý vrchol rozdělí na tři a každý přispěje do celkové hodnoty jednou šestnáctinou předchozího. Proto je součet v hladině $i$ roven $(\frac{3}{16})^i n^2$.
+        Poslední hladina má vrcholy označené hodnotami $T(1)$ a tím rekurze končí. Počet hladin odpovídá $\log_4 n$. V poslední hladině je $3^{\log_4 n} = n^{\log_4 3}$ hodnot $T(1)$. Proto platí
+    
+    $$T(n) = \sum\limits_{i = 0}^{\log_4 n} \left(\frac{3}{16}\right)^i n^2 + \Theta(n^{\log_4 3})$$
+    
+    \noindent Odtud
+    
+        $$T(n) < n^2 \sum\limits_{i = 0}^{\infty} \left(\frac{3}{16}\right)^i + \Theta(n^{\log_4 3}) = n^2 \frac{1}{1 - \frac{3}{16}} + \Theta(n^{\log_4 3}) = \frac{16}{13}n^2 + \Theta(n^{\log_4 3})$$
+        
+    \noindent Proto $T(n) \in \Theta(n^2)$
+    \vspace{10px}
+}
+
+
+\subsection{Složitost úlohy}
+Složitost úlohy je složitost nejlepšího algoritmu řešícího danou úlohu.
+
+\label{heading:tm}
+\subsection{Turingův stroj (Turing machine - TM)}
+Je teoretický model počítače, který se skládá z:
+
+\begin{itemize}[itemsep=0pt]
+    \item \textbf{řídící jednotky}, která se může nacházet v jednom z konečně mnoha stavů
+    \item potenciálně \textbf{nekonečné pásky} (nekonečné na obě strany) rozdělené na jednotlivé pole
+    \item \textbf{čtecí hlavy}, která umožňuje číst obsah polí a přepisovat obsah polí pásky
+\end{itemize}
+
+Na základě symbolu $X$, který čte hlava na pásce, a na základě stavu $q$, ve tkerém se nachází řídící jednotka, se řídící jednotka Turingova stroje přesune do stavu $p$, hlava přepíše obsah čteného pole na $Y$ a přesune se buď doprava nebo doleva (tato akce je popsána tzv. přechodovou funkcí).
+
+Je dán sedmicí ($Q,\Sigma, \Gamma, \delta, 
+q_0, B, F$), kde
+
+\begin{itemize}[itemsep=0pt]
+    \item $Q$ je konečná množina stavů
+    \item $\Sigma$ je konečná množina vstupních symbolů
+    \item $\Gamma$ je konečná množina páskových symbolů, přitom $\Sigma \subset \Gamma$
+    \item $B$ - je prázdný symbol (\textit{blank}), jedná se o páskový symbol, který není vstupním symbolem (tj. $B \in \Gamma \setminus \Sigma$)
+    \item $\delta$ je přechodová funkce, tj. parciální zobrazení z množiny $(Q \setminus F) \times \Gamma$ do množiny $Q \times \Gamma \times {L,R}$, (zde $L$ znamená pohyb hlavy o jedno pole doleva, $R$ pohyb doprava)
+    \item $q_0 \in Q$ je počáteční stav
+    \item $F \subset Q$ je množina koncových stavů
+\end{itemize}
+
+\paragraph{Nedeterministický TM} Je takový Turingův stroj, u kterého připustíme, aby v jedné situaci mohl provézt několik různých kroků.
+
+\paragraph{Přijímaný a rozhodovaný jazyk TM.} Vstupní slovo $w \in \Sigma^*$ je \textit{přijato} Turingovým strojem $M$ právě tehdy, když se Turingův stroj na slově $w$ úspěšně zastaví. Množinu slov $w \in \Sigma^*$, které Turingův stroj přijímá, se nazývá \textit{jazyk přijímaný M} a značíme ho $L(M)$.
+
+Turingův stroj \textit{rozhoduje} jazyk $L$, jestliže tento jazyk přijímá a navíc se na každém vstupu zastaví.
+
+\subsection{Třída složitosti -  $\mathcal{P}$}
+\label{heading:p}
+
+\paragraph{Třída $\mathcal{P}$} Řekneme, že rozhodovací úloha $\mathcal{U}$ leží ve třídě $\mathcal{P}$, jestliže \textbf{existuje deterministický} Turingův stroj, který \textbf{rozhodne} jazyk $L_\mathcal{U}$ a pracuje v \textbf{polynomiálním čase}; tj. funkce $T(n)$ je $\mathcal{O}(p(n))$ pro nějaký polynom $p(n)$.
+
+\paragraph{Příklady $\mathcal{P}$ úloh:}
+\begin{itemize}[itemsep=0pt]
+    \item \textbf{\color{darkBrown}Minimální kostra v grafu}. Je dán neorinetovaný graf $G$ s ohodnocením hran $c$. Je dáno číslo $k$. Existuje kostra grafu ceny menší nebo rovno $k$?
+    
+    \item \textbf{\color{darkBrown}Nejkratší cesty v acyklickém grafu}. Je dán acyklický graf s ohodnocením hran $a$. Jsou dány vrcholy $r$ a $c$. Je dáno číslo $k$. Existuje orientovaná cesta z vrcholu $r$ do vrcholu $c$ délky menší nebo rovno $k$?
+    
+    \item \textbf{\color{darkBrown}Toky v sítích}. Je dána síť s horním omezením $c$, dolním omezením $l$, se zdrojem z a spotřebičem $s$. Dále je dáno číslo $k$. Existuje přípustný tok od $z$ do $s$ velikosti alespoň $k$?
+    
+    \item \textbf{\color{darkBrown}Minimální řez}. Je dána síť s horním omezením $c$, dolním omezením $l$. Dále je dáno číslo $k$. Existuje řez, který má kapacitu menší nebo rovnu $k$?
+\end{itemize}
+
+\subsection{Třída složitosti - $\mathcal{NP}$}
+\label{heading:np}
+
+\paragraph{Třída $\mathcal{NP}$} Řekneme, že rozhodovací úloha $\mathcal{U}$ leží ve třídě $\mathcal{NP}$, jestliže \textbf{existuje nedeterministický} Turingův stroj, který \textbf{rozhodne} jazyk $L_\mathcal{U}$ a pracuje v \textbf{polynomiálním čase}.
+
+\paragraph{Příklady $\mathcal{NP}$ úloh:}
+\begin{itemize}[itemsep=0pt]
+    \item \textbf{\color{darkBrown}Kliky v grafu}. Je dán neorinetovaný graf $G$ a číslo $k$. Existuje klika v grafu $G$ o alespoň $k$ vrcholech?
+    
+    \item \textbf{\color{darkBrown}Nejkratší cesty v obecném grafu}. Je dán orientovaný graf s ohodnocením hran $a$. Jsou dány vrcholy $r$ a $v$. Je dáno číslo $k$. Existuje orientovaná cesta z vrcholu $r$ do vrcholu $c$ délky menší nebo rovno $k$?
+    
+    \item \textbf{\color{darkBrown}$k$-barevnost}. Je dán neorientovaný graf $G$. Je graf $G$ $k$-barevný?    
+    \item \textbf{\color{darkBrown}Knapsack}. Je dáno $n$ předmětů $1,2, \dots, n$. Každý předmět $i$ má cenu $c_i$ a váhu $w_i$. Dále jsou dána čísla $A$ a $B$. Je možné vybrat předměty tak, aby celková váha nepřevýšila $A$ a celková cena byla alespoň $B$?
+\end{itemize}
+
+Otázka obsahuje texty, úryvky a definice z \cite{tal:demlova}.

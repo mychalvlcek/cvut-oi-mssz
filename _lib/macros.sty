@@ -37,17 +37,17 @@
 \newcommand*\itemOK{\item[\Checkmark]}
 \newcommand*\itemFAIL{\item[\XSolidBrush]}
 
-\newcommand{\example}[1] {
+\newcommand{\example}[2] {
     \vspace{10px}
     
-    \noindent $\RHD$ {\bf Příklad:}
+    \noindent $\RHD$ {\bf #1}
     \vspace{5px}
      \begingroup
     \color{silver}\hrule
     \endgroup
     \vspace{-5px}
     \begin{adjustwidth}{1em}{0pt}
-        \noindent #1
+        \noindent #2
     \end{adjustwidth}
     \vspace{-5px}
     \begingroup
@@ -93,7 +93,7 @@
 		\University\\
 		\Faculty\\
 		\vglue 10mm
-		\includegraphics[width=50mm]{../_materials/LogoCVUT}
+		\includegraphics[width=50mm]{_materials/LogoCVUT}
 		\vglue 30mm
 		\bigskip
 		{\Large\bf \WorkTitle}\\

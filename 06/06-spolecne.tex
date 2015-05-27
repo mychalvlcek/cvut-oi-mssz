@@ -1,0 +1,175 @@
+%!TEX root=../oi-magistr-spolecne.tex
+\section[TAL - $\mathcal{NP}$ (complete, hard), Cookova věta, ..]{$\mathcal{NP}$-úplné a $\mathcal{NP}$-těžké úlohy, Cookova věta, heuristiky na řešení $\mathcal{NP}$-těžkých úloh, pravděpodobnostní algoritmy.}
+
+Než nadefinujeme třídu $\mathcal{NPC}$, musíme definovat (polynomiální) \textit{redukci úloh}.
+
+\paragraph{Redukce a polynomiální redukce úloh.} Jsou dány dvě rozhodovací úlohy $\mathcal{U}$ a $\mathcal{V}$. Řekneme, že úloha $\mathcal{U}$ se \textit{redukuje} na úlohu $\mathcal{V}$, jestliže existuje algoritmus (program pro RAM, Turingův stroj) $M$, který pro každou instanci $I$ úlohy $\mathcal{U}$ zkonstruuje instanci $I'$ úlohy $\mathcal{V}$ a to tak, že
+
+\begin{center}
+    $I$ je ANO-instance $\mathcal{U}$ iff $I'$ je ANO-instance $\mathcal{V}$
+\end{center}
+
+\noindent Fakt, že úloha $\mathcal{U}$ se redukuje na úlohu $\mathcal{V}$ značíme
+
+$$\mathcal{U} \lhd \mathcal{V}.$$
+
+Jestliže navíc, algoritmus $M$ pracuje v polynomiálním čase, říkáme, že $\mathcal{U}$ se \textit{polynomiálně} redukuje na $\mathcal{V}$ a značíme
+
+$$\mathcal{U} \lhd_p \mathcal{V}.$$
+
+\subsection{Třída složitosti - $\mathcal{NPC}$ ($\mathcal{NP}$-complete, $\mathcal{NP}$-úplná)}
+\label{heading:npc}
+
+\paragraph{$\mathcal{NP}$ úplné úlohy.} Řekneme, že rozhodovací úloha $\mathcal{U}$ je $\mathcal{NP}$ \textit{úplná }, jestliže
+
+\begin{enumerate}[itemsep=0pt]
+    \item $\mathcal{U}$ je ve třídě $\mathcal{NP}$
+    \item každá $\mathcal{NP}$ úloha se polynomiálně redukuje na $\mathcal{U}$.
+\end{enumerate}
+
+\paragraph{Příklady $\mathcal{NPC}$ úloh:}
+\begin{itemize}[itemsep=0pt]
+    \item \textbf{\color{darkBrown}SAT} Splnitelnost formulí v konjunktivním normálním tvaru.
+    
+    \item \textbf{\color{darkBrown}3 - CNF SAT}
+    
+    \item \textbf{\color{darkBrown}3-barevnost}
+    
+    \item \textbf{\color{darkBrown}ILP}
+\end{itemize}
+
+\subsection{Třída složitosti - $\mathcal{NP}$-hard ($\mathcal{NP}$-těžká)}
+\label{heading:nphard}
+
+\paragraph{$\mathcal{NP}$ obtížné úlohy.} Jestliže o některé úloze $\mathcal{U}$ pouze víme, že se na ní polynomiálně redukuje některá $\mathcal{NP}$ úplná úloha, pak říkáme, že $\mathcal{U}$ je $\mathcal{NP}$ těžká, nebo též $\mathcal{NP}$ obtížná. Poznamenejme, že to vlastně znamená, že $\mathcal{U}$ je alespoň tak těžká jako všechny $\mathcal{NP}$ úlohy.
+
+\subsection{Cookova věta}
+Dle Cookovy věty lze převést v polynomiálním čase libovolný nedeterministický Turingův stroj na problém splnitelnosti booleovských formulí v konjunktivním normálním tvaru (CNF SAT).
+
+Důsledkem této věty je vymezení skupiny úloh, které jsou nejtěžší v rámci všech problémů třídy NP. O těchto úlohách, na které lze převést v polynomiálním čase libovolnou jinou úlohu z NP, říkáme, že jsou $\mathcal{NP}$-úplné ($\mathcal{NP}$-complete).
+
+\paragraph{Důkaz.} Není těžké se přesvědčit že úloha \textit{SAT} je ve třídě $\mathcal{NP}$. První fáze nedeterministického algoritmu vygeneruje ohodnocení logických proměnných a na základě tohoto ohodnocení jsme schopni v polynomiálním čase ověřit, zda je v tomto ohodnocení formule pravdivá nebo ne.
+
+Druhá část důkazu spočívá v popisu práce TM formulí výrokové logiky. Načrtneme si základní myšlenku tohoto popisu.
+
+Je dán NTM $M = (Q,\Sigma, \Gamma, \delta, 
+q_0, B, F)$. Předpokládejme, že $M$ přijímá slovo $w$ a potřebuje při tom $p(n)$ kroků.
+
+Zavedeme logické proměnné:
+
+\begin{itemize}[itemsep=0pt]
+    \item $h_{i,j},~i = 0, 1, \hdots, p(n); j = 1, 2, \hdots, p(n);$
+    \begin{itemize}[itemsep=0pt]
+        \item $h_{i,j}$ je rovna 1, pokud hlava TM v čase $i$ čte $j$-té pole pásky.
+    \end{itemize}
+    
+    \item $s^{q}_{i},~i = 0, 1, \hdots, p(n); q \in Q$
+    \begin{itemize}[itemsep=0pt]
+        \item $s^{q}_{i}$ je rovna 1, pokud TM v čase $i$ je ve stavu $q$.
+    \end{itemize}
+    
+    \item $t^{A}_{i,j},~i = 0, 1, \hdots, p(n); j = 1, 2, \hdots, p(n); A \in \Gamma$
+    \begin{itemize}[itemsep=0pt]
+        \item $t^{A}_{i,j}$ je rovna 1, pokud v čase $i$ v $j$-té poli pásky je páskový symbol $A$.
+    \end{itemize}
+\end{itemize}
+
+\noindent Nyní je třeba formulemi popsat následující fakta:
+
+\begin{enumerate}
+    \item V každém okamžiku je TM v právě jednom stavu.
+    \item V každém okamžiku čte hlava TM právě jedno pole vstupní pásky.
+    \item V každém okamžiku je na každém poli pásky TM právě jeden páskový symbol.
+    \item Na začátku práce (tj. v čase 0) je TM ve stavu $q_0$, hlava čte první pole pásky a na pásce je na prvních $n$ polích vstupní slovo, ostatní pole pásky obsahují $B$.
+    \item Krok TM je určen přechodovou funkcí, tj. stav stroje, obsah čteného pole a poloha hlavy v čase $i + 1$ je dána přechodovou funkcí.
+    \item V polích pásky, které v čase $i$ hlava nečte, je obsah v čase $i + 1$ stejný jako v $i$.
+    \item Na konci práce TM , tj. v čase $p(n)$, je stroj ve stavu $q_f$.
+\end{enumerate}
+
+\noindent Ukážeme jak utvořit formule pro body \textbf{1}, \textbf{4}, \textbf{5}, \textbf{6} a \textbf{7}.
+
+Bod \textbf{1}. V okamžiku $i$ je TM v aspoň jednom stavu:
+
+    $$\bigvee \limits_{q \in Q} s^{q}_{i}.$$
+    
+V okamžiku $i$ TM není ve dvou různých stavech:
+
+    $$\bigwedge \limits_{q \neq q'} (\neg s^{q}_{i} \vee \neg s^{q'}_{i}).$$
+    
+Nyní fakt, že TM je v okamžiku $i$ právě v jednom stavu je konjunkce obou výše uvedených formulí:
+
+    $$ (\bigvee \limits_{q \in Q} s^{q}_{i}) \wedge \bigwedge \limits_{q \neq q'} (\neg s^{q}_{i} \vee \neg s^{q'}_{i}).$$
+
+Bod \textbf{4}. Na začátku práce (tj. v čase 0) je TM ve stavu $q_0$, hlava čte první pole pásky a na pásce je na prvních $n$ polích vstupní slovo $a_1 a_2\hdots a_n$, ostatní pole pásky obsahují $B$.
+
+    $$s^{q_0}_{0} \wedge h_{0,1} \wedge t^{a_1}_{0,1} \wedge \hdots \wedge t^{a_n}_{0,n} \wedge t^{B}_{0,n + 1} \wedge \hdots \wedge t^{B}_{0,p(n)}.$$
+    
+Bod \textbf{5}. Jestliže TM je v čase $i$ ve stavu $q$, hlava je na $j$-tém poli pásky, hlava čte páskový symbol $A$ a $\delta (q, A)$ se skládá z trojic $(p, C, D)$ (zde $D = 1$ znamená posun hlavy doprava, $D = -1$ znamená posun hlavy doleva), pak formule má tvar:
+
+    $$\bigwedge \limits_{j} \bigwedge \limits_{A \in \Gamma} ( (s^{q}_{i} \wedge h_{i,j} \wedge t^{A}_{i,j}) \Rightarrow \bigvee (s^{p}_{i+1} \wedge t^{C}_{i+1,j} \wedge h_{i+1,j+D}) ).$$
+    
+Bod \textbf{6}. Obsah polí kromě $j$-tého zůstává v čase $i + 1$ stejný:
+
+    $$\bigwedge \limits_{j} \bigwedge \limits_{A \in \Gamma} ((\neg h_{i,j} \wedge t^{A}_{i,j}) \Rightarrow t^{A}_{i+1,j}).$$
+    
+Bod \textbf{7}. Na konci práce TM, tj. v čase $p(n)$ je stroj ve stavu $q_f$:
+
+    $$s^{g_f}_{p(n)}.$$
+    
+Výslednou formuli dostaneme jako konjunkci všech dílčích formulí pro všechny časové okamžiky $i = 0, 1, \hdots , p(n)$.
+
+\subsection{Heuristiky na řešení $\mathcal{NP}$-těžkých úloh}
+
+Jestliže je třeba řešit problém, který je $\mathcal{NP}$ úplný, musíme pro větší instance opustit myšlenku přesného nebo optimálního řešení a smířit se s tím, že získáme \uv{dostatečně přesné} nebo \uv{dostatečně kvalitní} řešení. K tomu se používají heuristické algoritmy pracující v polynomiálním čase. Algoritmům, kde umíme zaručit \uv{jak daleko} je nalezené řešení od optimálního, se také říká \textbf{aproximační} algoritmy.
+
+\paragraph{Trojúhelníková nerovnost.} Řekneme, že instance obchodního cestujícího splňuje trojúhelníkovou nerovnost, jestliže pro každá tři města $i,j,k$ platí:$$d(i, j) \leq d(i, k) + d(k, j).$$
+
+\subsubsection{2-aproximační algoritmus}
+Jestliže instance $I$ obchodního cestujícího splňuje trojúhelníkovou nerovnost, pak existuje polynomiální algoritmus $\mathcal{A}$, který pro $I$ najde trasu délky $D$, kde $D \leq 2OPT(I)$ ($OPT(I)$ je délka optimální trasy v $I$).
+
+\paragraph{Slovní popis algoritmu.} Instanci $I$ považujeme za úplný graf $G$ s množinou vrcholů $V = \{1, 2, \hdots , n\}$ a ohodnocením $d$.
+\begin{enumerate}[itemsep=0pt]    \item V grafu $G$ najdeme minimální kostru $(V,K)$.    \item Kostru $(V,K)$ prohledáme do hloubky z libovolného vrcholu.    \item Trasu $T$ vytvoříme tak, že vrcholy procházíme ve stejném pořadí jako při prvním navštívení během prohledávání grafu. $T$ je výstupem algoritmu.
+\end{enumerate}Zřejmě platí, že délka kostry $K$ je menší než $OPT(I)$. Ano, vynecháme- li z optimální trasy některou hranu, dostaneme kostru grafu $G$. Protože $K$ je minimální kostra, musí být délka $K$ menší než $OPT(I)$ (předpokládáme, že vzdálenosti měst jsou kladné). Vzhledem k platnosti trojúhelníkové nerovnosti, je délka $T$ menší nebo rovna dvojnásobku délky kostry $K$.
+
+\subsubsection{Christofidesův algoritmus}
+Jestliže instance $I$ obchodního cestujícího splňuje trojúhelníkovou nerovnost, pak následující algoritmus najde trasu $T$ délky $D$ takovou, že $D \leq \frac{3}{2} OPT(I)$.
+
+Instanci $I$ považujeme za úplný graf $G$ s množinou vrcholů $V = \{1, 2, \hdots , n\}$ a ohodnocením $d$.
+
+\begin{enumerate}[itemsep=0pt]
+    \item V grafu $G$ najdeme minimální kostru $(V,K)$.    \item Vytvoříme úplný graf $H$ na množině všech vrcholů, které v kostře $(V,K)$ mají lichý stupeň.    \item V grafu $H$ najdeme nejlevnější perfektní párování $P$\footnote{Párování grafu je v teorii grafů taková podmnožina hran grafu, že žádné dvě hrany z této množiny nemají společný vrchol. (Idea je taková, že vrcholy grafu dáváme do párů. Pár může vzniknout jen tam, kde byla hrana. Přitom každý vrchol může být jen v jednom páru. ) Perfektní párování grafu je párování, které pokrývá všechny vrcholy grafu \cite{wiki:parovani}.}.    \item Hrany $P$ přidáme k hranám $K$ minimální kostry. Graf $(V,P \cup K)$ je eulerovský graf. V grafu $(V, P \cup K)$ sestrojíme uzavřený eulerovský tah.    \item Trasu $T$ získáme z eulerovského tahu tak, že vrcholy navštívíme v pořadí, ve kterém jsme do nich poprvé vstoupili při tvorbě eulerovského tahu.
+\end{enumerate}
+\noindent Platí, že délka takto vzniklé trasy je maximálně $\frac{3}{2}$ krát větší než délka optimální trasy.
+
+\subsection{Pravděpodobnostní algoritmy}
+
+\paragraph{Randomizovaný Turingův stroj (RTM).} RTM je, zhruba řečeno, Turingův stroj $M$ se dvěma nebo více páskami ( pásky > 2 obsahují $B$), kde první páska má stejnou roli jako u deterministického Turingova stroje, ale druhá páska obsahuje náhodnou posloupnost 0 a 1, tj. na každém políčku se 0 objeví s pravděpodobností $\frac{1}{2}$ a 1také s pravděpodobností $\frac{1}{2}$.
+
+\paragraph{Třída $\mathcal{RP}$.} Jazyk $L$ patří do třídy $\mathcal{RP}$ právě tehdy, když existuje RTM $M$ takový, že:
+
+\begin{enumerate}
+    \item Jestliže $w \notin L$, stroj $M$ se ve stavu $q_f$ zastaví s pravděpodobností 0.
+    \item Jestliže $w \in L$, stroj $M$ se ve stavu $q_f$ zastaví s pravděpodobností, která je alespoň rovna $\frac{1}{2}$.
+    \item Existuje polynom $p(n)$ takový, že každý běh $M$ (tj. pro jakýkoli obsah druhé pásky) trvá maximálně $p(n)$ kroků, kde $n$ je délka vstupního slova.
+\end{enumerate}
+
+\paragraph{Příklady $\mathcal{RP}$ úloh:}
+\begin{itemize}[itemsep=0pt]
+    \item \textbf{\color{darkBrown}Miller-Rabinův test prvočíselnosti}
+\end{itemize}
+
+\paragraph{TM typu Monte-Carlo.} RTM splňující podmínky 1 a 2 z definice $\mathcal{RP}$ se nazývá TM typu \textit{Monte-Carlo} (obecně nemusí pracovat v polynomiálním čase).
+
+\subsubsection{Třída $\mathcal{ZPP}$} Jazyk $L$ patří do třídy $\mathcal{ZPP}$ právě tehdy, když existuje RTM $M$ takový, že:
+
+\begin{enumerate}
+    \item Jestliže $w \notin L$, stroj $M$ se ve stavu $q_f$ zastaví s pravděpodobností 0.
+    \item Jestliže $w \in L$, stroj $M$ se ve stavu $q_f$ zastaví s pravděpodobností 1.
+    \item Střední hodnota počtu kroků $M$ v jednom běhu je $p(n)$, kde $p(n)$ je polynom a $n$ je délka vstupního slova.
+\end{enumerate}
+
+To znamená: $M$ neudělá chybu, ale nezaručujeme vždy polynomiální počet kroků při jednom běhu, pouze střední hodnota počtu kroků je polynomiální.
+
+\paragraph{TM typu Las-Vegas.} RTM splňující podmínky z definice $\mathcal{ZPP}$ se nazývá TM typu \textit{Las-Vegas}.
+
+Otázka obsahuje texty, úryvky a definice z \cite{tal:demlova}.
