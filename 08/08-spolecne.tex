@@ -75,7 +75,7 @@ Toky v síti, kde síť je pětice $(G, l, u, s, t)$, kde:
 Tok je takové ohodnocení hran, kde pro každý vrchol platí Kirchhoffův zákon: co tam vteče taky vyteče (a tok je v mezích $\langle l,u \rangle$), kromě zdroje a spotřebiče.
 
 \subsubsection{Ford-Fulkerson}
-\textbf{Ford-Fulkerson} hledá \textbf{maximální tok} v síti. Začnu libovolným přípustným tokem a postupně hledám zlepšující se cesty. Když taková cesta existuje, zvednu tok na té cestě. Když neexistuje, máme maximální tok. Zvedání toku se dělá tak, že zvednu tok na hraně vpřed a snížím tok na hraně vzad o rozdíl do kapacity (horní, dolní) cesty.
+\textbf{Ford-Fulkerson} hledá \textbf{maximální tok} v síti. Začnu libovolným přípustným tokem a postupně hledám zlepšující se cesty. Když taková cesta existuje, zvednu tok na té cestě. Když neexistuje, máme maximální tok. Zvedání toku se dělá tak, že zvednu tok na hraně vpřed a snížím tok na hraně vzad o rozdíl do (horní, dolní) kapacity cesty.
 
 \paragraph{Jak najít zlepšující se cestu:} Na začátku všechny hrany označím FALSE, zdroj TRUE. Když najdu hranu TRUE $\rightarrow$ FALSE a jde navýšit (hrana vpřed) tak označím druhou také TRUE. Když najdu FALSE $\rightarrow$ TRUE a jde snížit (hrana vzad), tak označím první TRUE.
 
